@@ -18,10 +18,11 @@
 }
 .Logo img {
   height: 35px;
-  margin-left: 30px;
 }
 .Logo h1 {
-  font-size: 30px;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .menuitems {
@@ -53,8 +54,31 @@
   text-align: center;
   text-decoration: none;
 }
+.menuitems li button {
+  font-size: 20px;
 
+  background: none;
+  border: 0;
+  padding: 18px 15px;
+  display: block;
+  height: 100%;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.menuitems li button:hover {
+  text-decoration: underline;
+  color: blue;
+}
 .menuitems li a:hover {
   text-decoration: underline;
   color: blue;
+}
+
+.dropdown-list-empty {
+  display: none;
+}
+.dropdown-list {
+  display: block;
 }
