@@ -1,10 +1,7 @@
-import NavBar from "./Components/Navbar/NavBar";
-import BannerMain from "./Components/Banners/BannerMain";
-
 import { Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./Pages/HomePage/HomePage";
 function App() {
   return (
     <>

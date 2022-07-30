@@ -1,0 +1,22 @@
+.list-title {
+  display: flex;
+  justify-content: center;
+}
+.list-title h1 {
+  font-size: 50px;
+}
+
+.yellow {
+  margin-left: 10px;
+
+  color: orange;
+}
+.black {
+  color: black;
+}
+
+.book-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
