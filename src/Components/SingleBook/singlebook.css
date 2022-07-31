@@ -1,15 +1,16 @@
 .sisngle-container {
   height: 400px;
-  width: 200px;
+  width: 175px;
   margin: 20px;
+  margin-top: 50px;
 }
 
 .sisngle-container img {
   height: 275px;
-  width: 200px;
+  width: 100%;
 }
 .sisngle-container h1 {
-  font-size: 22px;
+  font-size: 20px;
   color: black;
 }
 .sisngle-container h3 {

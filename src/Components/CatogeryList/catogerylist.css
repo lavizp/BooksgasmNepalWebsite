@@ -8,15 +8,11 @@
   font-size: 50px;
 }
 
-.yellow {
-  margin-left: 10px;
+.black {
   color: orange;
 }
-.black {
-  color: black;
-}
 
-.book-list {
+.catogery-list {
   display: flex;
   justify-content: flex-start;
   margin-left: 20px;
