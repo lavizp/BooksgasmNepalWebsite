@@ -11,10 +11,9 @@ export default function HomePage() {
   return (
     <>
       <BannerMain />
-      <div id="startshopping">
-        <NavBar />
-        <BookList title="BestSeller" />
-      </div>
+      <div id="startshopping" />
+      <NavBar />
+      <BookList title="BestSeller" />
       <CatogeryList />
       <BookList title="Recommended" />
     </>
