@@ -16,6 +16,9 @@ export default function BannerMain() {
           <br />
           Rrice
         </h1>
+        <a href="#startshopping">
+          <button>Start Shopping</button>
+        </a>
       </div>
     </div>
   );

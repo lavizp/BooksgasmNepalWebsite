@@ -10,7 +10,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 export default function NavBar() {
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="light"
+        variant="light"
+        sticky="top"
+      >
         <Container>
           <Navbar.Brand href="#home" className="Logo">
             <img src={logo} />

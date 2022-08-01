@@ -20,7 +20,7 @@ export default function CatogeryList() {
   return (
     <>
       <div className="list-title">
-        <h1 className="black">Catogeries:</h1>
+        <h1 className="yellow">Catogeries:</h1>
       </div>
       <div className="catogery-list">
         {catogerylist.map((item, index) => (

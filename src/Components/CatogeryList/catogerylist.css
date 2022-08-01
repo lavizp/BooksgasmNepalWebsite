@@ -8,8 +8,12 @@
   font-size: 50px;
 }
 
-.black {
+.yellow {
+  margin-left: 10px;
   color: orange;
+}
+.black {
+  color: black;
 }
 
 .catogery-list {
