@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SingleBookElement from "../SingleBook/SingleBookElement";
-import bookListData from "../../Data/BookList.json";
+import db from "../../Data/firebase";
 import "./booklist.css";
 
 export default function BookList({ title }) {
+  const [bookListData, setBookListData] = useState([]);
+
+  useEffect(() => {
+    db.collection("bookList").onSnapshot((snapshot) => {
+      snapshot.forEach((element) => {
+        var data = element.data();
+        setBookListData((arr) => [...arr, data]);
+      });
+    });
+  }, []);
+  console.log(bookListData);
   return (
     <>
       <div className="list-title">
