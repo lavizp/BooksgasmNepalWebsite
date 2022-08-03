@@ -8,8 +8,10 @@ export default function BookList({ title }) {
 
   useEffect(() => {
     db.collection("bookList").onSnapshot((snapshot) => {
+      setBookListData([]);
       snapshot.forEach((element) => {
         var data = element.data();
+
         setBookListData((arr) => [...arr, data]);
       });
     });
