@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import db from "../../Data/firebase";
 import BookList from "../../Components/BookList/BookList";
-import SingleBookElement from "../../Components/SingleBook/SingleBookElement";
-
+import NavBar from "../../Components/Navbar/NavBar";
+import "./catogeriespage.css";
 export default function SingleCatogeryPage() {
   const [bookListData, setBookListData] = useState([]);
-  const [bestSellers, setBestSellers] = useState([]);
   useEffect(() => {
     db.collection("bookList").onSnapshot((snapshot) => {
       setBookListData([]);
@@ -18,20 +17,17 @@ export default function SingleCatogeryPage() {
     });
   }, []);
   const { catogery } = useParams();
+  const catogeryTitle = catogery.charAt(0).toUpperCase() + catogery.slice(1);
   return (
-    <div>
-      <h1>{catogery}</h1>
-      {bookListData
-        .filter((itm) => itm.catogery == catogery)
-        .map((item, index) => (
-          <SingleBookElement
-            key={index}
-            title={item.title}
-            author={item.author}
-            price={item.price}
-            image={item.image}
-          />
-        ))}
-    </div>
+    <>
+      <NavBar />
+
+      <div className="page-container">
+        <BookList
+          title={catogeryTitle}
+          books={bookListData.filter((itm) => itm.catogery == catogery)}
+        />
+      </div>
+    </>
   );
 }

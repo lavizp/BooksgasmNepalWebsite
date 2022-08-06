@@ -18,7 +18,7 @@ export default function NavBar() {
         sticky="top"
       >
         <Container>
-          <Navbar.Brand href="#home" className="Logo">
+          <Navbar.Brand href="/" className="Logo">
             <img src={logo} />
             <h1>BooksGasm</h1>
           </Navbar.Brand>
@@ -27,13 +27,17 @@ export default function NavBar() {
             <Nav className="me-auto"></Nav>
             <Nav>
               <NavDropdown title="Catogeries" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
+                <NavDropdown.Item href="/catogeries/self-help">
                   Self-Help
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Fiction</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Money</NavDropdown.Item>
+                <NavDropdown.Item href="/catogeries/fiction">
+                  Fiction
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/catogeries/money">
+                  Money
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item href="/catogeries">
                   All Catogeries
                 </NavDropdown.Item>
               </NavDropdown>

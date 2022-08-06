@@ -14,7 +14,7 @@ export default function CatogeryList() {
       title: "Self-Help",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5GX5Anhtr52rEFTaxfwS-oUukoPVAhOOvkA&usqp=CAU",
-      link: "/selfhelp",
+      link: "/self-help",
     },
   ];
   return (

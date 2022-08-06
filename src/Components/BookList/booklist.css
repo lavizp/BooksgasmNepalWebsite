@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 20px;
-  margin-top: 30px;
 }
 .list-title h1 {
   font-size: 50px;
@@ -20,5 +19,4 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 20px;
-  margin-bottom: 50px;
 }

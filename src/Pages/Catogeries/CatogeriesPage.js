@@ -1,7 +1,12 @@
 import React from "react";
-
-import SingleCatogeryPage from "./SingleCatogeryPage";
+import NavBar from "../../Components/Navbar/NavBar";
+import CatogeryList from "../../Components/CatogeryList/CatogeryList";
 
 export default function CatogeriesPage() {
-  return <div>CatogeriesPage</div>;
+  return (
+    <div>
+      <NavBar />
+      <CatogeryList />
+    </div>
+  );
 }

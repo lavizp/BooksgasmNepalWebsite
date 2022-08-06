@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function SingleCatogeryElement({ image, title, link }) {
   let navigate = useNavigate();
   const visitCatogery = () => {
-    navigate("catogeries" + link);
+    navigate("/catogeries" + link);
   };
   return (
     <div className="single-container-catogery" onClick={visitCatogery}>
