@@ -44,7 +44,7 @@ export default function NavBar() {
               <Nav.Link href="#features">Combo-Deals</Nav.Link>
               <Nav.Link href="#pricing">About</Nav.Link>
               <Nav.Link href="#pricing">Contacts</Nav.Link>
-              <Nav.Link href="#pricing">
+              <Nav.Link href="/cart">
                 <FaShoppingCart />
               </Nav.Link>
             </Nav>

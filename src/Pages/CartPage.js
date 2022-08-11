@@ -1,5 +1,10 @@
 import React from "react";
+import NavBar from "../Components/Navbar/NavBar";
 
 export default function CartPage() {
-  return <div>CartPage</div>;
+  return (
+    <>
+      <NavBar />
+    </>
+  );
 }

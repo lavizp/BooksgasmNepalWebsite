@@ -6,6 +6,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import SingleBookPage from "./Pages/SingleBookPage/SingleBookPage";
 import CatogeriesPage from "./Pages/Catogeries/CatogeriesPage";
 import SingleCatogeryPage from "./Pages/Catogeries/SingleCatogeryPage";
+import CartPage from "./Pages/CartPage";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/book/:title" element={<SingleBookPage />} />
         <Route path="/catogeries" element={<CatogeriesPage />} />
         <Route path="/catogeries/:catogery" element={<SingleCatogeryPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
     </>
   );

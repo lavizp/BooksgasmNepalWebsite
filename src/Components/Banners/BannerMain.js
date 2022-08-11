@@ -14,7 +14,7 @@ export default function BannerMain() {
           <br />
           an Affordeble
           <br />
-          Rrice
+          Price
         </h1>
         <a href="#startshopping" className="startshoppingbutton">
           <button>Start Shopping</button>
