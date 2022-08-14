@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./singlebook.css";
 import db from "../../Data/firebase";
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 
 export default function SingleBookElement({ title, id, author, price, image }) {
   const [addedToCart, setAddedToCart] = useState(false);
+  const [cartDatas, setCartDatas] = useState([]);
   const [cartID, setCartID] = useState();
   const cartData = collection(db, "Cart");
   const addToCart = async () => {
@@ -23,6 +30,19 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     const book = doc(db, "Cart", cartID);
     await deleteDoc(book);
   };
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(cartData);
+      setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+    console.log(cartDatas);
+    cartDatas.forEach((element) => {
+      if (element.title == title) setAddedToCart(true);
+    });
+  }, [cartDatas]);
   return (
     <div className="sisngle-container">
       <img src={image} />
