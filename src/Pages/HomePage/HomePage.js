@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import db from "../../Data/firebase";
 
+import { getDocs, collection } from "firebase/firestore";
+
 import NavBar from "../../Components/Navbar/NavBar";
 import BannerMain from "../../Components/Banners/BannerMain";
 import BookList from "../../Components/BookList/BookList";
@@ -9,16 +11,14 @@ import "./homepage.css";
 
 export default function HomePage() {
   const [bookListData, setBookListData] = useState([]);
-
+  const usersCollectionRef = collection(db, "bookList");
   useEffect(() => {
-    db.collection("bookList").onSnapshot((snapshot) => {
-      setBookListData([]);
-      snapshot.forEach((element) => {
-        var data = element.data();
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
-        setBookListData((arr) => [...arr, data]);
-      });
-    });
+    getUsers();
   }, []);
 
   return (
