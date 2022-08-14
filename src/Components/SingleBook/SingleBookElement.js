@@ -15,6 +15,8 @@ export default function SingleBookElement({ title, id, author, price, image }) {
   const [cartID, setCartID] = useState();
   const cartData = collection(db, "Cart");
   const addToCart = async () => {
+    setAddedToCart(true);
+
     await addDoc(cartData, {
       title: title,
       image: image,
@@ -23,10 +25,9 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     }).then((docRef) => {
       setCartID(docRef.id);
     });
-    setAddedToCart(true);
   };
   const removeFromCart = async () => {
-    console.log(cartID);
+    setAddedToCart(true);
     const book = doc(db, "Cart", cartID);
     await deleteDoc(book);
   };
@@ -38,7 +39,6 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     };
 
     getUsers();
-    console.log(cartDatas);
     cartDatas.forEach((element) => {
       if (element.title == title) setAddedToCart(true);
     });
