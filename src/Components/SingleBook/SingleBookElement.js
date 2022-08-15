@@ -8,7 +8,7 @@ import {
   doc,
   getDocs,
 } from "firebase/firestore";
-
+import { useNavigate } from "react-router-dom";
 export default function SingleBookElement({ title, id, author, price, image }) {
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartDatas, setCartDatas] = useState([]);
@@ -43,8 +43,13 @@ export default function SingleBookElement({ title, id, author, price, image }) {
       if (element.title == title) setAddedToCart(true);
     });
   }, [cartDatas]);
+  let navigate = useNavigate();
+
+  const navigateToSingleBook = () => {
+    navigate("/" + title);
+  };
   return (
-    <div className="sisngle-container">
+    <div className="sisngle-container" onClick={navigateToSingleBook}>
       <img src={image} />
       <h1>{title}</h1>
       <h3>{author}</h3>

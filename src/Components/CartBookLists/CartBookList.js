@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./cartbooklist.css";
 import SingleBook from "../SingleCart/SingleBook";
 import db from "../../Data/firebase";
-import { collection, docs, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function CartBookList() {
   const [cartDatas, setCartDatas] = useState([]);
