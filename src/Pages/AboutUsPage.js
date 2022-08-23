@@ -1,5 +1,10 @@
 import React from "react";
-
+import NavBar from "../Components/Navbar/NavBar";
 export default function AboutUsPage() {
-  return <div>AboutUsPage</div>;
+  return (
+    <>
+      <NavBar />
+      <h1>Hami Khattra ho</h1>
+    </>
+  );
 }

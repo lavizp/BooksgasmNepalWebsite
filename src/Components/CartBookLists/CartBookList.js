@@ -16,14 +16,6 @@ export default function CartBookList() {
 
     getUsers();
   }, [cartDatas]);
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(cartData);
-      setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    getUsers();
-  }, [cartDatas]);
   return (
     <>
       {cartDatas.map((item, index) => (

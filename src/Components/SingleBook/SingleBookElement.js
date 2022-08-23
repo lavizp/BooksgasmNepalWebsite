@@ -29,31 +29,36 @@ export default function SingleBookElement({ title, id, author, price, image }) {
       });
       setAddedToCart(true);
       setcartText("Remove");
-      return;
+    } else {
+      console.log(cartID);
+      setcartText("Removing");
+
+      const book = doc(db, "Cart", cartID);
+      await deleteDoc(book);
+      setAddedToCart(false);
+      setcartText("Add to Cart");
     }
-    setcartText("Removing");
-
-    const book = doc(db, "Cart", cartID);
-    await deleteDoc(book);
-    setcartText("Add to Cart");
-
-    setAddedToCart(true);
   };
 
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(cartData);
       setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(cartDatas);
     };
 
     getUsers();
-    cartDatas.forEach((element) => {
-      if (element.title == title) {
-        setcartText("Remove");
-        setAddedToCart(true);
-      }
-    });
   }, []);
+  useEffect(() => {
+    if (!addedToCart) {
+      cartDatas.forEach((element) => {
+        if (element.title == title) {
+          setcartText("Remove");
+          setAddedToCart(true);
+        }
+      });
+    }
+  }, [cartDatas]);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {
