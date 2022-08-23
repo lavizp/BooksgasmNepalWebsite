@@ -10,26 +10,34 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 export default function SingleBookElement({ title, id, author, price, image }) {
+  const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
+
   const [cartDatas, setCartDatas] = useState([]);
   const [cartID, setCartID] = useState();
   const cartData = collection(db, "Cart");
-  const addToCart = async () => {
-    setAddedToCart(true);
+  const cartButton = async () => {
+    if (!addedToCart) {
+      setcartText("Adding");
+      await addDoc(cartData, {
+        title: title,
+        image: image,
+        author: author,
+        price: price,
+      }).then((docRef) => {
+        setCartID(docRef.id);
+      });
+      setAddedToCart(true);
+      setcartText("Remove");
+      return;
+    }
+    setcartText("Removing");
 
-    await addDoc(cartData, {
-      title: title,
-      image: image,
-      author: author,
-      price: price,
-    }).then((docRef) => {
-      setCartID(docRef.id);
-    });
-  };
-  const removeFromCart = async () => {
-    setAddedToCart(true);
     const book = doc(db, "Cart", cartID);
     await deleteDoc(book);
+    setcartText("Add to Cart");
+
+    setAddedToCart(true);
   };
 
   useEffect(() => {
@@ -40,29 +48,28 @@ export default function SingleBookElement({ title, id, author, price, image }) {
 
     getUsers();
     cartDatas.forEach((element) => {
-      if (element.title == title) setAddedToCart(true);
+      if (element.title == title) {
+        setcartText("Remove");
+        setAddedToCart(true);
+      }
     });
   }, [cartDatas]);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {
-    navigate("/" + title);
+    navigate("/book/" + id);
   };
   return (
-    <div className="sisngle-container" onClick={navigateToSingleBook}>
-      <img src={image} />
-      <h1>{title}</h1>
+    <div className="sisngle-container">
+      <img src={image} onClick={navigateToSingleBook} />
+      <h1 onClick={navigateToSingleBook}>
+        {title.length < 18 ? title : title.slice(0, 15) + "..."}
+      </h1>
       <h3>{author}</h3>
       <h5>Rs.{price}</h5>
-      {addedToCart ? (
-        <button onClick={removeFromCart}>
-          <h4>Remove</h4>
-        </button>
-      ) : (
-        <button onClick={addToCart}>
-          <h4>Add to Cart</h4>
-        </button>
-      )}
+      <button onClick={cartButton}>
+        <h4>{cartText}</h4>
+      </button>
     </div>
   );
 }
