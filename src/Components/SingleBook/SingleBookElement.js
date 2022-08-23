@@ -53,7 +53,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
         setAddedToCart(true);
       }
     });
-  }, [cartDatas]);
+  }, []);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {
