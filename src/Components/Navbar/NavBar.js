@@ -42,7 +42,7 @@ export default function NavBar() {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="#features">Combo-Deals</Nav.Link>
-              <Nav.Link href="#pricing">About</Nav.Link>
+              <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="#pricing">Contacts</Nav.Link>
               <Nav.Link href="/cart">
                 <FaShoppingCart />
