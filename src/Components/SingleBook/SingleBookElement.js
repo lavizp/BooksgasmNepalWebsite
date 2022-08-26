@@ -35,8 +35,8 @@ export default function SingleBookElement({ title, id, author, price, image }) {
 
       const book = doc(db, "Cart", cartID);
       await deleteDoc(book);
-      setAddedToCart(false);
       setcartText("Add to Cart");
+      setAddedToCart(false);
     }
   };
 
@@ -55,6 +55,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
         if (element.title == title) {
           setcartText("Remove");
           setAddedToCart(true);
+          setCartID(element.id);
         }
       });
     }
