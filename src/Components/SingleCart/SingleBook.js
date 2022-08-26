@@ -12,7 +12,7 @@ export default function SingleBook({ image, title, price, author, id }) {
     await deleteDoc(book);
   };
   return (
-    <div className="sisngle-container">
+    <div className="single-container">
       <img src={image} />
       <h1>{title}</h1>
       <h3>{author}</h3>

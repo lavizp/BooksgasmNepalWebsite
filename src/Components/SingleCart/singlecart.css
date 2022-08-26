@@ -1,4 +1,4 @@
-.sisngle-container {
+.single-container {
   height: 100px;
   width: 700px;
   margin: 20px;
@@ -6,29 +6,29 @@
   display: flex;
 }
 
-.sisngle-container img {
+.single-container img {
   height: 100px;
   width: 70px;
 }
-.sisngle-container h1 {
+.single-container h1 {
   font-size: 20px;
   color: black;
   text-align: center;
   margin: auto;
 }
-.sisngle-container h3 {
+.single-container h3 {
   margin: auto;
 
   font-size: 18px;
   color: grey;
 }
-.sisngle-container h5 {
+.single-container h5 {
   font-size: 18px;
   color: black;
   font-weight: bold;
   margin: auto;
 }
-.sisngle-container button {
+.single-container button {
   display: flex;
   text-align: center;
   margin: 0 auto;
@@ -39,7 +39,7 @@
   border-radius: 5px;
   border: 1px black solid;
 }
-.sisngle-container button:hover {
+.single-container button:hover {
   display: flex;
   text-align: center;
   margin: 0 auto;
@@ -50,7 +50,7 @@
   color: white;
   border: 1px black solid;
 }
-.sisngle-container button h4 {
+.single-container button h4 {
   text-align: center;
   margin: auto;
 }
