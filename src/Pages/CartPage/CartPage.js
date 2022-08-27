@@ -8,23 +8,25 @@ import "./cartpage.css";
 export default function CartPage() {
   const [cartDatas, setCartDatas] = useState([]);
   const [totalPrice, SetTotalPrice] = useState(0);
-  const cartData = collection(db, "Cart");
+  const cartDatabase = collection(db, "Cart");
 
   useEffect(() => {
     const getUsers = async () => {
-      const data = await getDocs(cartData);
+      const data = await getDocs(cartDatabase);
       setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      let tempTotal = await getTotalPrice(cartDatas);
+      console.log("asd");
+      SetTotalPrice(tempTotal);
     };
 
     getUsers();
-    getTotalPrice();
   }, []);
-
-  const getTotalPrice = () => {
-    cartDatas.forEach((element) => {
-      console.log(element);
-      SetTotalPrice(totalPrice + element.price);
+  const getTotalPrice = async (arr) => {
+    let total = 0;
+    arr.forEach((element) => {
+      total += element.price;
     });
+    return total;
   };
   return (
     <>

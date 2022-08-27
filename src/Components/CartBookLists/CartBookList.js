@@ -15,7 +15,7 @@ export default function CartBookList() {
     };
 
     getUsers();
-  }, [cartDatas]);
+  }, []);
   return (
     <>
       {cartDatas.map((item, index) => (
