@@ -17,15 +17,13 @@ export default function CartPage() {
     };
 
     getUsers();
-  }, []);
-  useEffect(() => {
     getTotalPrice();
-  }, [cartDatas]);
+  }, []);
 
   const getTotalPrice = () => {
     cartDatas.forEach((element) => {
-      SetTotalPrice(totalPrice + parseInt(element.price));
-      console.log(totalPrice);
+      console.log(element);
+      SetTotalPrice(totalPrice + element.price);
     });
   };
   return (
