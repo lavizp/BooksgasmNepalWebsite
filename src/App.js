@@ -6,7 +6,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import SingleBookPage from "./Pages/SingleBookPage/SingleBookPage";
 import CatogeriesPage from "./Pages/Catogeries/CatogeriesPage";
 import SingleCatogeryPage from "./Pages/Catogeries/SingleCatogeryPage";
-import CartPage from "./Pages/CartPage";
+import CartPage from "./Pages/CartPage/CartPage";
 import AboutUsPage from "./Pages/AboutUsPage";
 function App() {
   return (
