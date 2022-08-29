@@ -3,13 +3,21 @@ import "./singlecart.css";
 import db from "../../Data/firebase";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 
-export default function SingleBook({ image, title, price, author, id }) {
+export default function SingleBook({
+  image,
+  title,
+  price,
+  author,
+  id,
+  reload,
+}) {
   const [addedToCart, setAddedToCart] = useState(false);
   const [cartDatas, setCartDatas] = useState([]);
   const cartData = collection(db, "Cart");
   const removeFromCart = async () => {
     const book = doc(db, "Cart", id);
     await deleteDoc(book);
+    reload();
   };
   return (
     <div className="single-container">

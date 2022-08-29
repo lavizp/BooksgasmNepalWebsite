@@ -8,12 +8,11 @@ export default function CartBookList() {
   const [cartDatas, setCartDatas] = useState([]);
   const cartData = collection(db, "Cart");
 
+  const getUsers = async () => {
+    const data = await getDocs(cartData);
+    setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(cartData);
-      setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
     getUsers();
   }, []);
   return (
@@ -26,6 +25,7 @@ export default function CartBookList() {
           title={item.title}
           author={item.author}
           price={item.price}
+          reload={getUsers()}
         />
       ))}
     </>
