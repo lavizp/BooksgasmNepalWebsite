@@ -40,7 +40,7 @@ export default function CartPage() {
                 title={item.title}
                 author={item.author}
                 price={item.price}
-                reload={getUsers()}
+                reload={getUsers}
               />
             );
           })}
