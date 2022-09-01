@@ -12,13 +12,13 @@ export default function CartPage() {
   const getUsers = async () => {
     const data = await getDocs(cartDatabase);
     setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    let tempTotal = await getTotalPrice(cartDatas);
+    let tempTotal = getTotalPrice(cartDatas);
     SetTotalPrice(tempTotal);
   };
   useEffect(() => {
     getUsers();
   }, []);
-  const getTotalPrice = async (arr) => {
+  const getTotalPrice = (arr) => {
     let total = 0;
     if (arr.length == 0) return 0;
     arr.forEach((element) => {
