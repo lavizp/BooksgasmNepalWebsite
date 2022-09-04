@@ -16,7 +16,7 @@ export default function CartPage() {
     });
     return total;
   };
-  const tp = useMemo(() => {
+  const totalPrice = useMemo(() => {
     return getTotalPrice(cartDatas);
   }, [cartDatas]);
   const cartDatabase = collection(db, "Cart");
@@ -47,7 +47,7 @@ export default function CartPage() {
             );
           })}
         </div>
-        <div className="price-box-cartpage">data is {tp}</div>
+        <div className="price-box-cartpage">data is {totalPrice}</div>
       </div>
     </>
   );
