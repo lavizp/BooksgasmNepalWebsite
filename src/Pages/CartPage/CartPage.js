@@ -32,21 +32,27 @@ export default function CartPage() {
     <>
       <NavBar />
       <div className="cartpage-container">
-        <div className="book-list-cartpage">
-          {cartDatas.map((item, index) => {
-            return (
-              <SingleBook
-                key={index}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                author={item.author}
-                price={item.price}
-                reload={getUsers}
-              />
-            );
-          })}
-        </div>
+        {cartDatas.length == 0 ? (
+          <div className="no-cart-books">
+            <h1>No books Added to the Cart</h1>
+          </div>
+        ) : (
+          <div className="book-list-cartpage">
+            {cartDatas.map((item, index) => {
+              return (
+                <SingleBook
+                  key={index}
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
+                  author={item.author}
+                  price={item.price}
+                  reload={getUsers}
+                />
+              );
+            })}
+          </div>
+        )}
         <div className="price-box-cartpage">data is {totalPrice}</div>
       </div>
     </>

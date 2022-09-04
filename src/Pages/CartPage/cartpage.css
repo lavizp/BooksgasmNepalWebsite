@@ -7,3 +7,13 @@
   width: 40%;
   border: 2px red solid;
 }
+.no-cart-books {
+  height: 400px;
+  width: 700px;
+}
+
+.no-cart-books h1 {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 50px;
+}
