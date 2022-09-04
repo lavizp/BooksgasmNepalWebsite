@@ -44,7 +44,6 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     const getUsers = async () => {
       const data = await getDocs(cartData);
       setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(cartDatas);
     };
 
     getUsers();

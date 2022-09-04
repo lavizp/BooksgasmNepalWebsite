@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
 import db from "../../Data/firebase";
@@ -7,18 +7,8 @@ import "./cartpage.css";
 
 export default function CartPage() {
   const [cartDatas, setCartDatas] = useState([]);
-  const [totalPrice, SetTotalPrice] = useState(0);
-  const cartDatabase = collection(db, "Cart");
-  const getUsers = async () => {
-    const data = await getDocs(cartDatabase);
-    setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    let tempTotal = getTotalPrice(cartDatas);
-    SetTotalPrice(tempTotal);
-  };
-  useEffect(() => {
-    getUsers();
-  }, []);
   const getTotalPrice = (arr) => {
+    console.log("gettotalprice chalyo mula haru");
     let total = 0;
     if (arr.length == 0) return 0;
     arr.forEach((element) => {
@@ -26,6 +16,18 @@ export default function CartPage() {
     });
     return total;
   };
+  const tp = useMemo(() => {
+    return getTotalPrice(cartDatas);
+  }, [cartDatas]);
+  const cartDatabase = collection(db, "Cart");
+  const getUsers = async () => {
+    const data = await getDocs(cartDatabase);
+    setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -45,7 +47,7 @@ export default function CartPage() {
             );
           })}
         </div>
-        <div className="price-box-cartpage">data is {totalPrice}</div>
+        <div className="price-box-cartpage">data is {tp}</div>
       </div>
     </>
   );
