@@ -3,13 +3,7 @@ import { useParams } from "react-router-dom";
 import "./singlebookpage.css";
 import NavBar from "../../Components/Navbar/NavBar";
 import db from "../../Data/firebase";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function SingleBookPage() {
   const { title } = useParams();
@@ -57,7 +51,7 @@ export default function SingleBookPage() {
           </p>
           <div className="singlebook-pricebox">
             <h1>Price : Rs{book?.price}</h1>
-            <button>Add to Cart</button>
+            <button>{book?.isInCart ? "Remove" : "Add to Cart"}</button>
           </div>
         </div>
       </div>

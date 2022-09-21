@@ -16,7 +16,6 @@ function App() {
         <Route path="/book/:title" element={<SingleBookPage />} />
         <Route path="/catogeries" element={<CatogeriesPage />} />
         <Route path="/catogeries/:catogery" element={<SingleCatogeryPage />} />
-        <Route path="/:book" element={<SingleBookPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutUsPage />} />
       </Routes>

@@ -29,7 +29,7 @@ export default function SingleBookElement({
   };
   useEffect(() => {
     setcartText(isInCart ? "Remove" : "Add to Cart");
-  });
+  }, []);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./singlecart.css";
 import db from "../../Data/firebase";
-import { deleteDoc, doc } from "firebase/firestore";
 
 export default function SingleBook({
   image,
