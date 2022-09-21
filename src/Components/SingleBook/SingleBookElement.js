@@ -11,7 +11,7 @@ export default function SingleBookElement({
   isInCart,
 }) {
   const [cartText, setcartText] = useState("Add to Cart");
-  const [addedToCart, setAddedToCart] = useState(isInCart);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const cartButton = async () => {
     if (!addedToCart) {
@@ -28,6 +28,7 @@ export default function SingleBookElement({
     }
   };
   useEffect(() => {
+    setAddedToCart(isInCart);
     setcartText(isInCart ? "Remove" : "Add to Cart");
   }, []);
   let navigate = useNavigate();

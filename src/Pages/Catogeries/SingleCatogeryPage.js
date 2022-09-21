@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import db from "../../Data/firebase";
+import { getDocs, collection } from "firebase/firestore";
+
 import BookList from "../../Components/BookList/BookList";
 import NavBar from "../../Components/Navbar/NavBar";
 import "./catogeriespage.css";
 export default function SingleCatogeryPage() {
   const [bookListData, setBookListData] = useState([]);
+  const usersCollectionRef = collection(db, "bookList");
   useEffect(() => {
-    db.collection("bookList").onSnapshot((snapshot) => {
-      setBookListData([]);
-      snapshot.forEach((element) => {
-        var data = element.data();
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
-        setBookListData((arr) => [...arr, data]);
-      });
-    });
+    getUsers();
   }, []);
   const { catogery } = useParams();
   const catogeryTitle = catogery.charAt(0).toUpperCase() + catogery.slice(1);
