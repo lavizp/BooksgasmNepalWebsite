@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./singlebook.css";
 import db from "../../Data/firebase";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 export default function SingleBookElement({
   title,
@@ -34,7 +27,9 @@ export default function SingleBookElement({
       setAddedToCart(false);
     }
   };
-
+  useEffect(() => {
+    setcartText(isInCart ? "Remove" : "Add to Cart");
+  });
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {

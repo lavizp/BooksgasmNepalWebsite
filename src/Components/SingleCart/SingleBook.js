@@ -12,9 +12,7 @@ export default function SingleBook({
   reload,
 }) {
   const removeFromCart = async () => {
-    const book = doc(db, "Cart", id);
-
-    await deleteDoc(book);
+    await db.collection("bookList").doc(id).update({ isInCart: false });
     reload();
   };
   return (
