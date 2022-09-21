@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./Pages/HomePage/HomePage";
@@ -8,6 +8,7 @@ import CatogeriesPage from "./Pages/Catogeries/CatogeriesPage";
 import SingleCatogeryPage from "./Pages/Catogeries/SingleCatogeryPage";
 import CartPage from "./Pages/CartPage/CartPage";
 import AboutUsPage from "./Pages/AboutUsPage";
+import Footer from "./Components/Footer/Footer";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/about" element={<AboutUsPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
