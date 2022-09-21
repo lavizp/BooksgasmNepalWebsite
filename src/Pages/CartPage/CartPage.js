@@ -19,7 +19,12 @@ export default function CartPage() {
   const bookData = collection(db, "bookList");
   const getUsers = async () => {
     const data = await getDocs(bookData);
-    setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    var tempData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    setCartDatas(
+      tempData.filter((itm) => {
+        return itm.isInCart == true;
+      })
+    );
   };
   useEffect(() => {
     getUsers();
@@ -39,23 +44,19 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartDatas
-              .filter((item) => {
-                return item.isInCart == true;
-              })
-              .map((item, index) => {
-                return (
-                  <SingleBook
-                    key={index}
-                    id={item.id}
-                    image={item.image}
-                    title={item.title}
-                    author={item.author}
-                    price={item.price}
-                    reload={getUsers}
-                  />
-                );
-              })}
+            {cartDatas.map((item, index) => {
+              return (
+                <SingleBook
+                  key={index}
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
+                  author={item.author}
+                  price={item.price}
+                  reload={getUsers}
+                />
+              );
+            })}
           </div>
         )}
         <div className="price-box-cartpage">data is {totalPrice}</div>
