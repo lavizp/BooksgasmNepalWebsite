@@ -9,56 +9,32 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-export default function SingleBookElement({ title, id, author, price, image }) {
+export default function SingleBookElement({
+  title,
+  id,
+  author,
+  price,
+  image,
+  isInCart,
+}) {
   const [cartText, setcartText] = useState("Add to Cart");
-  const [addedToCart, setAddedToCart] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(isInCart);
 
-  const [cartDatas, setCartDatas] = useState([]);
-  const [cartID, setCartID] = useState();
-  const cartData = collection(db, "Cart");
   const cartButton = async () => {
     if (!addedToCart) {
       setcartText("Adding");
-      await addDoc(cartData, {
-        title: title,
-        image: image,
-        author: author,
-        price: price,
-      }).then((docRef) => {
-        setCartID(docRef.id);
-      });
+      await db.collection("bookList").doc(id).update({ isInCart: true });
+
       setAddedToCart(true);
       setcartText("Remove");
     } else {
-      console.log(cartID);
       setcartText("Removing");
-
-      const book = doc(db, "Cart", cartID);
-      await deleteDoc(book);
+      await db.collection("bookList").doc(id).update({ isInCart: false });
       setcartText("Add to Cart");
       setAddedToCart(false);
     }
   };
 
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(cartData);
-      setCartDatas(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    getUsers();
-  }, []);
-  useEffect(() => {
-    if (!addedToCart) {
-      cartDatas.forEach((element) => {
-        if (element.title == title) {
-          setcartText("Remove");
-          setAddedToCart(true);
-          setCartID(element.id);
-        }
-      });
-    }
-  }, [cartDatas]);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {

@@ -17,6 +17,7 @@ export default function BookList({ title, books }) {
             author={item.author}
             price={item.price}
             image={item.image}
+            isInCart={item.isInCart}
           />
         ))}
       </div>
