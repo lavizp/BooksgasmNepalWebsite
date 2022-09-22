@@ -59,7 +59,7 @@ export default function CartPage() {
             })}
           </div>
         )}
-        <div className="price-box-cartpage">data is {totalPrice}</div>
+        <div className="price-box-cartpage">price is {totalPrice}</div>
       </div>
     </>
   );
