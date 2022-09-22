@@ -2,24 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./singlebookpage.css";
 import NavBar from "../../Components/Navbar/NavBar";
-import db from "../../Data/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { GetBookData } from "../../Services/GetBookData";
 
 export default function SingleBookPage() {
   const { title } = useParams();
+
   const [bookListData, setBookListData] = useState([]);
-  const usersCollectionRef = collection(db, "bookList");
   const [book, setBook] = useState();
   useEffect(() => {
     const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
+      const data = await GetBookData();
       setBookListData(
         data.docs
-          .map((doc) => ({ ...doc.data(), id: doc.id }))
           .filter((data) => data.id == title)
+          .map((doc) => ({ ...doc.data(), id: doc.id }))
       );
     };
-
     getUsers();
     setBook(bookListData[0]);
   }, [bookListData]);
