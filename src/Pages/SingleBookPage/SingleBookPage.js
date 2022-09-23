@@ -2,23 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./singlebookpage.css";
 import NavBar from "../../Components/Navbar/NavBar";
-import { GetBookData } from "../../Services/GetBookData";
 
-export default function SingleBookPage() {
+export default function SingleBookPage({ bookListData }) {
   const { title } = useParams();
 
-  const [bookListData, setBookListData] = useState([]);
   const [book, setBook] = useState();
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await GetBookData();
-      setBookListData(
-        data.docs
-          .filter((data) => data.id == title)
-          .map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    };
-    getUsers();
+    bookListData.filter((data) => data.id == title);
     setBook(bookListData[0]);
   }, [bookListData]);
 

@@ -21,17 +21,13 @@ export default function SingleBookElement({
 
       setAddedToCart(true);
       setcartText("Remove");
-      SetTotalItemInCart((totalItemInCart) => {
-        totalItemInCart--;
-      });
+      SetTotalItemInCart(totalItemInCart + 1);
     } else {
       setcartText("Removing");
       await db.collection("bookList").doc(id).update({ isInCart: false });
       setcartText("Add to Cart");
       setAddedToCart(false);
-      SetTotalItemInCart((totalItemInCart) => {
-        totalItemInCart++;
-      });
+      SetTotalItemInCart(totalItemInCart - 1);
     }
   };
   useEffect(() => {

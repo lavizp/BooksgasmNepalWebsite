@@ -6,18 +6,9 @@ import { getDocs, collection } from "firebase/firestore";
 import BookList from "../../Components/BookList/BookList";
 import NavBar from "../../Components/Navbar/NavBar";
 import "./catogeriespage.css";
-export default function SingleCatogeryPage() {
-  const [bookListData, setBookListData] = useState([]);
-  const usersCollectionRef = collection(db, "bookList");
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
-      setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    getUsers();
-  }, []);
+export default function SingleCatogeryPage({ bookListData }) {
   const { catogery } = useParams();
+
   const catogeryTitle = catogery.charAt(0).toUpperCase() + catogery.slice(1);
   return (
     <>

@@ -48,7 +48,7 @@ export default function NavBar() {
               <Nav.Link href="#pricing">Contacts</Nav.Link>
               <Nav.Link href="/cart">
                 <FaShoppingCart />
-                {totalItemInCart}
+                {totalItemInCart > 0 && totalItemInCart}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

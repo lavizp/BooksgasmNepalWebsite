@@ -48,11 +48,14 @@ function App() {
           <Route path="/" element={<HomePage bookListData={bookListData} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/book/:title" element={<SingleBookPage />} />
+          <Route
+            path="/book/:title"
+            element={<SingleBookPage bookListData={bookListData} />}
+          />
           <Route path="/catogeries" element={<CatogeriesPage />} />
           <Route
             path="/catogeries/:catogery"
-            element={<SingleCatogeryPage />}
+            element={<SingleCatogeryPage bookListData={bookListData} />}
           />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/about" element={<AboutUsPage />} />
