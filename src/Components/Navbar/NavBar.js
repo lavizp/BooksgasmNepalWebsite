@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import logo from "./logo.png";
 import "./navbar.css";
 import { FaShoppingCart } from "react-icons/fa";
@@ -6,8 +6,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { CartItemsContext } from "../../App";
 
 export default function NavBar() {
+  const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
   return (
     <>
       <Navbar
@@ -46,6 +48,7 @@ export default function NavBar() {
               <Nav.Link href="#pricing">Contacts</Nav.Link>
               <Nav.Link href="/cart">
                 <FaShoppingCart />
+                {totalItemInCart}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

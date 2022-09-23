@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./singlebook.css";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
+import { CartItemsContext } from "../../App";
 export default function SingleBookElement({
   title,
   id,
@@ -12,7 +13,7 @@ export default function SingleBookElement({
 }) {
   const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
-
+  const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
   const cartButton = async () => {
     if (!addedToCart) {
       setcartText("Adding");
@@ -20,11 +21,17 @@ export default function SingleBookElement({
 
       setAddedToCart(true);
       setcartText("Remove");
+      SetTotalItemInCart((totalItemInCart) => {
+        totalItemInCart--;
+      });
     } else {
       setcartText("Removing");
       await db.collection("bookList").doc(id).update({ isInCart: false });
       setcartText("Add to Cart");
       setAddedToCart(false);
+      SetTotalItemInCart((totalItemInCart) => {
+        totalItemInCart++;
+      });
     }
   };
   useEffect(() => {

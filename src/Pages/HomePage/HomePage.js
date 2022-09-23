@@ -7,16 +7,16 @@ import "./homepage.css";
 
 import { GetBookData } from "../../Services/GetBookData";
 
-export default function HomePage() {
-  const [bookListData, setBookListData] = useState([]);
+export default function HomePage({ bookListData }) {
+  // const [bookListData, setBookListData] = useState([]);
 
-  useEffect(() => {
-    const getBooks = async () => {
-      const data = await GetBookData();
-      setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getBooks();
-  }, []);
+  // useEffect(() => {
+  //   const getBooks = async () => {
+  //     const data = await GetBookData();
+  //     setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   };
+  //   getBooks();
+  // }, []);
 
   return (
     <>
