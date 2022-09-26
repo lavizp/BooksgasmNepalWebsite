@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import Card from "@mui/joy/Card";
+import Button from "@mui/joy/Button";
 import "./singlebook.css";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
@@ -40,16 +42,37 @@ export default function SingleBookElement({
     navigate("/book/" + id);
   };
   return (
-    <div className="sisngle-container">
-      <img src={image} onClick={navigateToSingleBook} />
+    // <Card>
+    //   <div className="sisngle-container">
+    //     <img src={image} onClick={navigateToSingleBook} />
+    //     <h1 onClick={navigateToSingleBook}>
+    //       {title.length < 18 ? title : title.slice(0, 15) + "..."}
+    //     </h1>
+    //     <h3>{author}</h3>
+    //     <h5>Rs.{price}</h5>
+    //     <button onClick={cartButton}>
+    //       <h4>{cartText}</h4>
+    //     </button>
+    //   </div>
+    // </Card>
+    <Card
+      sx={{
+        tabSize: 20,
+      }}
+    >
+      <img
+        src={image}
+        onClick={navigateToSingleBook}
+        style={{ width: "250px" }}
+      />
       <h1 onClick={navigateToSingleBook}>
         {title.length < 18 ? title : title.slice(0, 15) + "..."}
       </h1>
       <h3>{author}</h3>
       <h5>Rs.{price}</h5>
-      <button onClick={cartButton}>
+      <Button onClick={cartButton} variant="solid">
         <h4>{cartText}</h4>
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 }
