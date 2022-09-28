@@ -4,6 +4,7 @@ import SingleBook from "../../Components/SingleCart/SingleBook";
 import db from "../../Data/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import "./cartpage.css";
+import Button from "@mui/joy/Button";
 
 export default function CartPage() {
   const [cartDatas, setCartDatas] = useState([]);
@@ -59,7 +60,13 @@ export default function CartPage() {
             })}
           </div>
         )}
-        <div className="price-box-cartpage">price is {totalPrice}</div>
+        <div className="price-box-cartpage">
+          <h1>Your Total is:</h1>
+          <h1>Rs. {totalPrice}</h1>
+          <Button variant="solid" color="primary">
+            CheckOut
+          </Button>
+        </div>
       </div>
     </>
   );

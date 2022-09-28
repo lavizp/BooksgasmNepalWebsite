@@ -9,18 +9,17 @@ export default function SingleBookPage({ bookListData }) {
   const [book, setBook] = useState();
   useEffect(() => {
     bookListData.filter((data) => data.id == title);
-    setBook(bookListData[0]);
   }, [bookListData]);
 
   return (
     <>
       <NavBar />
-      <h1 className="book_title">{book?.title}</h1>
-      <h3 className="book-author">-{book?.author}</h3>
+      <h1 className="book_title">{bookListData?.title}</h1>
+      <h3 className="book-author">-{bookListData?.author}</h3>
 
       <div className="singlebook-container">
         <div className="book_data">
-          <img src={book?.image} className="book_image"></img>
+          <img src={bookListData?.image} className="book_image"></img>
         </div>
         <div className="book-description">
           <p>
@@ -38,8 +37,8 @@ export default function SingleBookPage({ bookListData }) {
             amet..", comes from a line in section 1.10.32.
           </p>
           <div className="singlebook-pricebox">
-            <h1>Price : Rs{book?.price}</h1>
-            <button>{book?.isInCart ? "Remove" : "Add to Cart"}</button>
+            <h1>Price : Rs{bookListData?.price}</h1>
+            <button>{bookListData?.isInCart ? "Remove" : "Add to Cart"}</button>
           </div>
         </div>
       </div>

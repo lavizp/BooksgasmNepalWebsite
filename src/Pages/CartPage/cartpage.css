@@ -3,9 +3,11 @@
   flex-wrap: wrap;
 }
 .price-box-cartpage {
+  padding-top: 30px;
   height: 400px;
   width: 40%;
   border: 2px black solid;
+  text-align: center;
 }
 .no-cart-books {
   height: 400px;
