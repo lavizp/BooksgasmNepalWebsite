@@ -3,9 +3,7 @@ import NavBar from "../../Components/Navbar/NavBar";
 import "./signup.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-
 import db from "../../Data/firebase";
-import { doc, setDoc } from "firebase/firestore";
 
 export default function SignUpPage() {
   const emailRef = useRef();
@@ -24,20 +22,20 @@ export default function SignUpPage() {
     }
     setIsLoading(true);
     try {
-      signUp(emailRef.current.value, passwordRef.current.value);
-      await setDoc(doc(db, "users", currentUser.uid), {
-        name: "Laviz Pandey",
-        phoneNumber: 9840030487,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        cartItems: [],
-      });
+      const { user } = signUp(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
       navigate("/");
     } catch (err) {
       console.error(err);
     }
     setIsLoading(false);
   }
+  // async function createUserDocument(user) {
+  //   if (!user) return;
+  //   db.collection("users").doc(user.uid);
+  // }
   return (
     <div>
       <NavBar />
