@@ -43,8 +43,7 @@ export default function SingleBookElement({
     <Card
       variant="solid"
       sx={{
-        minWidth: 200,
-        minHeight: 400,
+        maxWidth: 200,
         mt: 5,
         mr: 7,
       }}
@@ -54,13 +53,12 @@ export default function SingleBookElement({
           src={image}
           onClick={navigateToSingleBook}
           alt=""
-          style={{ width: "100%", height: "400px" }}
+          style={{ width: "100%", height: "300px" }}
         />
       </Card>
       <Typography
-        textColor="dark"
-        fontSize="30px"
-        fontWeight="lg"
+        fontSize="20px"
+        fontWeight="xlg"
         onClick={navigateToSingleBook}
       >
         {title.length < 18 ? title : title.slice(0, 17) + "..."}

@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import logo from "./logo.png";
 import "./navbar.css";
-import { FaShoppingCart } from "react-icons/fa";
+import { IconButton, Badge } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -47,8 +49,11 @@ export default function NavBar() {
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="#pricing">Contacts</Nav.Link>
               <Nav.Link href="/cart">
-                <FaShoppingCart />
-                {totalItemInCart > 0 && totalItemInCart}
+                <IconButton aria-label="cart">
+                  <Badge badgeContent={totalItemInCart} color="primary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
