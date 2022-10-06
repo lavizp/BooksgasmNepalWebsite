@@ -45,7 +45,7 @@ export default function SingleBookElement({
       sx={{
         maxWidth: 200,
         mt: 5,
-        mr: 7,
+        mr: 3,
       }}
     >
       <Card>
