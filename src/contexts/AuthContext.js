@@ -10,17 +10,25 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(0);
+  const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   async function signUp(email, password) {
-    const { user } = auth.createUserWithEmailAndPassword(email, password);
-    await createUserDocument(user, []);
-    return user;
+    await auth.createUserWithEmailAndPassword(email, password);
+    console.log(auth.currentUser.uid);
+    setDoc(doc(db, "users", auth.currentUser.uid), {
+      email,
+      password,
+      cartData: [],
+    });
   }
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
+  }
+  function signOut() {
+    console.log("Sign Out");
+    return auth.signOut(auth);
   }
 
   async function createUserDocument(user, additionalData) {
@@ -30,7 +38,7 @@ export function AuthProvider({ children }) {
     const { email } = user;
     const { cartData } = additionalData;
     try {
-      userRef.set(email, cartData);
+      userRef.setDoc(email, cartData);
     } catch (err) {
       console.log(err);
     }
@@ -47,6 +55,7 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signUp,
+    signOut,
   };
   return (
     <AuthContext.Provider value={value}>

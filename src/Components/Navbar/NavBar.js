@@ -10,8 +10,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { CartItemsContext } from "../../App";
 
+import { useAuth, signOut } from "../../contexts/AuthContext";
+
 export default function NavBar() {
   const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
+  const { currentUser, signOut } = useAuth();
+  function signOutHandler() {
+    signOut();
+  }
   return (
     <>
       <Navbar
@@ -55,6 +61,9 @@ export default function NavBar() {
                   </Badge>
                 </IconButton>
               </Nav.Link>
+              {currentUser && (
+                <button onClick={() => signOutHandler()}>Sign Out</button>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
