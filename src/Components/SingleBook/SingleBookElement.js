@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, CardOverflow, Typography, Button, Box } from "@mui/joy";
+import { Card, Typography, Button, Box } from "@mui/material";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
 import { CartItemsContext } from "../../App";
@@ -43,19 +43,20 @@ export default function SingleBookElement({
     <Card
       variant="solid"
       sx={{
-        minWidth: 300,
+        minWidth: 200,
         minHeight: 400,
         mt: 5,
+        mr: 7,
       }}
     >
-      <CardOverflow>
+      <Card>
         <img
           src={image}
           onClick={navigateToSingleBook}
           alt=""
           style={{ width: "100%", height: "400px" }}
         />
-      </CardOverflow>
+      </Card>
       <Typography
         textColor="dark"
         fontSize="30px"
@@ -64,15 +65,12 @@ export default function SingleBookElement({
       >
         {title.length < 18 ? title : title.slice(0, 17) + "..."}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box>
         <Box>
           <Typography>{author}</Typography>
           <Typography fontWeight="xl">Rs.{price}</Typography>
         </Box>
-        <Button
-          onClick={cartButton}
-          sx={{ background: "orange", color: "white" }}
-        >
+        <Button variant="contained" onClick={cartButton} sx={{ width: "100%" }}>
           <Typography fontSize="20px">{cartText}</Typography>
         </Button>
       </Box>
