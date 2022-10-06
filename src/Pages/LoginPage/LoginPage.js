@@ -1,14 +1,30 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import "./loginpage.css";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleSubmit = (e) => {
-    console.log(emailRef.current.value);
-  };
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+    setIsLoading(false);
+  }
   return (
     <div>
       <NavBar />

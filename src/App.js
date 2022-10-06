@@ -13,6 +13,7 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import SignUpPage from "./Pages/SignupPage/SignUpPage";
 
 import { GetBookData } from "./Services/GetBookData";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export const CartItemsContext = React.createContext();
 function App() {
@@ -40,12 +41,16 @@ function App() {
   }, [bookListData]);
 
   return (
-    <>
+    <AuthProvider>
       <CartItemsContext.Provider
         value={{ totalItemInCart, SetTotalItemInCart }}
       >
         <Routes>
-          <Route path="/" element={<HomePage bookListData={bookListData} />} />
+          <Route
+            exact
+            path="/"
+            element={<HomePage bookListData={bookListData} />}
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route
@@ -62,7 +67,7 @@ function App() {
         </Routes>
         <Footer />
       </CartItemsContext.Provider>
-    </>
+    </AuthProvider>
   );
 }
 
