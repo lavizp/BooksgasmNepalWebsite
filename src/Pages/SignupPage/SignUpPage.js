@@ -1,18 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import "./signup.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+import db from "../../Data/firebase";
+import { doc, setDoc } from "firebase/firestore";
+
 export default function SignUpPage() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmpasswordRef = useRef();
-  const { signUp } = useAuth();
+  const { signUp, currentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (isLoading) return;
@@ -22,7 +24,14 @@ export default function SignUpPage() {
     }
     setIsLoading(true);
     try {
-      await signUp(emailRef.current.value, passwordRef.current.value);
+      signUp(emailRef.current.value, passwordRef.current.value);
+      await setDoc(doc(db, "users", currentUser.uid), {
+        name: "Laviz Pandey",
+        phoneNumber: 9840030487,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        cartItems: [],
+      });
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -33,6 +42,7 @@ export default function SignUpPage() {
     <div>
       <NavBar />
       <h1>Signup</h1>
+      {currentUser.uid}
       <input type="email" ref={emailRef} placeholder="email"></input>
       <input type="password" ref={passwordRef} placeholder="password"></input>
       <input
