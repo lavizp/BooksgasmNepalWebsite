@@ -13,6 +13,8 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import SignUpPage from "./Pages/SignupPage/SignUpPage";
 
 import { GetBookData } from "./Services/GetBookData";
+import { GetUserData } from "./Services/GetUserData";
+
 import { AuthProvider } from "./contexts/AuthContext";
 
 export const CartItemsContext = React.createContext();
