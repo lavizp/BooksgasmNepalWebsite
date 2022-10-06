@@ -31,18 +31,6 @@ export function AuthProvider({ children }) {
     return auth.signOut(auth);
   }
 
-  async function createUserDocument(user, additionalData) {
-    if (!user) return;
-    const userRef = Firestore.doc(`/users/${user.uid}`);
-
-    const { email } = user;
-    const { cartData } = additionalData;
-    try {
-      userRef.setDoc(email, cartData);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import SingleBookElement from "../SingleBook/SingleBookElement";
 import "./booklist.css";
 
+import { useAuth } from "../../contexts/AuthContext";
+
 export default function BookList({ title, books }) {
+  const { currentUser } = useAuth();
+
   return (
     <>
       <div className="list-title">
@@ -17,7 +21,7 @@ export default function BookList({ title, books }) {
             author={item.author}
             price={item.price}
             image={item.image}
-            isInCart={item.isInCart}
+            isInCart={currentUser ? item.isInCart : false}
           />
         ))}
       </div>
