@@ -13,15 +13,9 @@ import LoginPage from "./Pages/LoginPage/LoginPage";
 import SignUpPage from "./Pages/SignupPage/SignUpPage";
 
 import { GetBookData } from "./Services/GetBookData";
-import { GetUserData } from "./Services/GetUserData";
 
-import { AuthProvider } from "./contexts/AuthContext";
-import { useAuth } from "./contexts/AuthContext";
-
-export const CartItemsContext = React.createContext();
 function App() {
   const [bookListData, setBookListData] = useState([]);
-  const [userData, setUserData] = useState([]);
 
   const [totalItemInCart, SetTotalItemInCart] = useState(0);
   const getTotalItems = (arr) => {
@@ -46,7 +40,7 @@ function App() {
   }, [bookListData]);
 
   return (
-    <CartItemsContext.Provider value={{ totalItemInCart, SetTotalItemInCart }}>
+    <>
       <Routes>
         <Route
           exact
@@ -68,7 +62,7 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
       </Routes>
       <Footer />
-    </CartItemsContext.Provider>
+    </>
   );
 }
 

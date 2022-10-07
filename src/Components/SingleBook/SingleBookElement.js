@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Card, Typography, Button, Box } from "@mui/material";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
-import { CartItemsContext } from "../../App";
 import { useAuth } from "../../contexts/AuthContext";
 import { useUser } from "../../contexts/UserContext";
 import firebase from "firebase/compat/app";
@@ -10,12 +9,16 @@ import firebase from "firebase/compat/app";
 export default function SingleBookElement({ title, id, author, price, image }) {
   const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
+  const navigate = useNavigate();
 
-  const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
   const { currentUser } = useAuth();
-  const { userData } = useUser();
+  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
 
   const cartButton = async () => {
+    if (!currentUser) {
+      navigate("/signup");
+      return;
+    }
     if (!addedToCart) {
       setcartText("Adding");
       await db
@@ -47,7 +50,6 @@ export default function SingleBookElement({ title, id, author, price, image }) {
       setcartText("Add to Cart");
     }
   }, [userData]);
-  let navigate = useNavigate();
 
   const navigateToSingleBook = () => {
     navigate("/book/" + id);

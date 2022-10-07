@@ -28,6 +28,7 @@ export function AuthProvider({ children }) {
   }
   function signOut() {
     console.log("Sign Out");
+    window.location.reload(false);
     return auth.signOut(auth);
   }
 

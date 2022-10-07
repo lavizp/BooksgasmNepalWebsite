@@ -8,15 +8,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { CartItemsContext } from "../../App";
 
 import { useAuth } from "../../contexts/AuthContext";
+import { useUser } from "../../contexts/UserContext";
 
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
-  const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
   const { currentUser, signOut } = useAuth();
+  const { totalItemInCart } = useUser();
   function signOutHandler() {
     signOut();
   }

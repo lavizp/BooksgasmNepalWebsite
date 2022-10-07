@@ -14,7 +14,6 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
-    e.preventDefault();
     if (isLoading) return;
     setIsLoading(true);
     try {

@@ -12,6 +12,7 @@ export function UserProvider({ children }) {
   const [allUserData, setAllUserData] = useState([]);
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [totalItemInCart, SetTotalItemInCart] = useState(0);
 
   const { currentUser } = useAuth();
 
@@ -19,21 +20,23 @@ export function UserProvider({ children }) {
     const getUser = async () => {
       const dt = await GetUserData();
       setAllUserData(dt.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setIsLoading(false);
     };
     getUser();
-    setIsLoading(false);
   }, []);
   useEffect(() => {
     if (!currentUser) return;
     allUserData.forEach((data) => {
       if (data.id == currentUser.uid) {
         setUserData(data);
-        console.log(data);
+        SetTotalItemInCart(data.cartData.length);
       }
     });
   }, [allUserData]);
   const value = {
     userData,
+    totalItemInCart,
+    SetTotalItemInCart,
   };
   return (
     <UserContext.Provider value={value}>

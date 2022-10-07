@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import SingleBookElement from "../SingleBook/SingleBookElement";
 import "./booklist.css";
 
-import { useAuth } from "../../contexts/AuthContext";
-
 export default function BookList({ title, books }) {
   return (
     <>
