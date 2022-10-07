@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
-import db from "../../Data/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import "./cartpage.css";
 import Button from "@mui/joy/Button";
 
-export default function CartPage() {
+import { useUser } from "../../contexts/UserContext";
+import { useAuth } from "../../contexts/AuthContext";
+
+export default function CartPage({ bookListData }) {
   const [cartDatas, setCartDatas] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(3);
+
+  const { userData } = useUser();
+  const { currentUser } = useAuth();
+
   const getTotalPrice = (arr) => {
     let total = 0;
     if (arr.length == 0) return 0;
@@ -17,22 +22,22 @@ export default function CartPage() {
     });
     return total;
   };
-  const bookData = collection(db, "bookList");
   const getUsers = async () => {
-    const data = await getDocs(bookData);
-    var tempData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    setCartDatas(
-      tempData.filter((itm) => {
-        return itm.isInCart == true;
-      })
-    );
+    if (!currentUser) return;
+    let tempData = bookListData.map((element) => {
+      if (userData.cartData?.includes(element.id.toString())) {
+        return element;
+      }
+    });
+    setCartDatas(tempData);
   };
   useEffect(() => {
-    getUsers();
-    setTotalPrice(getTotalPrice(cartDatas));
-  }, []);
+    getUsers(userData);
+
+    //setTotalPrice(getTotalPrice(cartDatas));
+  }, [cartDatas]);
   useEffect(() => {
-    setTotalPrice(getTotalPrice(cartDatas));
+    //setTotalPrice(getTotalPrice(cartDatas));
   }, [cartDatas]);
 
   return (
@@ -45,10 +50,10 @@ export default function CartPage() {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartDatas.map((item, index) => {
+            {cartDatas?.map((item) => {
               return (
                 <SingleBook
-                  key={index}
+                  key={item.id}
                   id={item.id}
                   image={item.image}
                   title={item.title}

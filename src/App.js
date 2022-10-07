@@ -58,7 +58,10 @@ function App() {
           path="/catogeries/:catogery"
           element={<SingleCatogeryPage bookListData={bookListData} />}
         />
-        <Route path="/cart" element={<CartPage />} />
+        <Route
+          path="/cart"
+          element={<CartPage bookListData={bookListData} />}
+        />
         <Route path="/about" element={<AboutUsPage />} />
       </Routes>
       <Footer />
