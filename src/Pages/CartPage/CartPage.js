@@ -3,41 +3,29 @@ import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
 import "./cartpage.css";
 import Button from "@mui/joy/Button";
-
+import useCartData from "../../Hooks/UseCartData";
 import { useUser } from "../../contexts/UserContext";
 import { useAuth } from "../../contexts/AuthContext";
+import db from "../../Data/firebase";
+import firebase from "firebase/compat/app";
 
 export default function CartPage({ bookListData }) {
-  const [cartDatas, setCartDatas] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(3);
-
-  const { userData } = useUser();
+  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
+  const [totalPrice, setTotalPrice] = useState(0);
   const { currentUser } = useAuth();
-
-  const getTotalPrice = (arr) => {
-    let total = 0;
-    if (arr.length == 0) return 0;
-    arr.forEach((element) => {
-      total += element.price;
-    });
-    return total;
-  };
-  const getCartData = useCallback(() => {
-    if (!currentUser) return;
-    setCartDatas(
-      bookListData.map((element) => {
-        if (userData.cartData?.includes(element.id.toString())) {
-          return element;
-        }
-      })
-    );
-  }, []);
+  const { cartData, getTotalPrice } = useCartData(currentUser, bookListData);
+  async function removeFromCart(id) {
+    await db
+      .collection("users")
+      .doc(currentUser.uid.toString())
+      .update({
+        cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
+      });
+    SetTotalItemInCart(totalItemInCart - 1);
+  }
   useEffect(() => {
-    getCartData();
-  }, []);
-  useEffect(() => {
-    //setTotalPrice(getTotalPrice(cartDatas));
-  }, [cartDatas]);
+    setTotalPrice(getTotalPrice(cartData));
+  }, [cartData]);
 
   return (
     <>
@@ -49,7 +37,7 @@ export default function CartPage({ bookListData }) {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartDatas?.map((item) => {
+            {cartData.map((item) => {
               return (
                 <SingleBook
                   key={item.id}
@@ -58,7 +46,7 @@ export default function CartPage({ bookListData }) {
                   title={item.title}
                   author={item.author}
                   price={item.price}
-                  reload={getCartData}
+                  reload={removeFromCart}
                 />
               );
             })}

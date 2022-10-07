@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./singlecart.css";
 import db from "../../Data/firebase";
 
+import { useAuth } from "../../contexts/AuthContext";
+
 export default function SingleBook({
   image,
   title,
@@ -10,9 +12,9 @@ export default function SingleBook({
   id,
   reload,
 }) {
+  const { currentUser } = useAuth();
   const removeFromCart = async () => {
-    await db.collection("bookList").doc(id).update({ isInCart: false });
-    reload();
+    reload(id);
   };
   return (
     <div className="single-container">

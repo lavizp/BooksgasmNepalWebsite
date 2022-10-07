@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import bookListDataTemp from "./MOCK_DATA.json";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./Pages/HomePage/HomePage";
@@ -21,7 +22,6 @@ function App() {
       const data = await GetBookData();
       setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
     getBooks();
   }, []);
 
