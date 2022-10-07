@@ -4,22 +4,16 @@ import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
 import { CartItemsContext } from "../../App";
 import { useAuth } from "../../contexts/AuthContext";
+import { useUser } from "../../contexts/UserContext";
 import firebase from "firebase/compat/app";
-import { doc, collection } from "firebase/firestore";
 
-export default function SingleBookElement({
-  title,
-  id,
-  author,
-  price,
-  image,
-  isInCart,
-}) {
+export default function SingleBookElement({ title, id, author, price, image }) {
   const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
 
   const { totalItemInCart, SetTotalItemInCart } = useContext(CartItemsContext);
   const { currentUser } = useAuth();
+  const { userData } = useUser();
 
   const cartButton = async () => {
     if (!addedToCart) {
@@ -46,11 +40,13 @@ export default function SingleBookElement({
       SetTotalItemInCart(totalItemInCart - 1);
     }
   };
-
   useEffect(() => {
-    setAddedToCart(isInCart);
-    setcartText(isInCart ? "Remove" : "Add to Cart");
-  }, []);
+    if (userData.cartData?.includes(id)) {
+      setcartText("Remove");
+    } else {
+      setcartText("Add to Cart");
+    }
+  }, [userData]);
   let navigate = useNavigate();
 
   const navigateToSingleBook = () => {

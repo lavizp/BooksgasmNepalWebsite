@@ -16,12 +16,14 @@ import { GetBookData } from "./Services/GetBookData";
 import { GetUserData } from "./Services/GetUserData";
 
 import { AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext";
 
 export const CartItemsContext = React.createContext();
 function App() {
   const [bookListData, setBookListData] = useState([]);
-  const [totalItemInCart, SetTotalItemInCart] = useState(0);
+  const [userData, setUserData] = useState([]);
 
+  const [totalItemInCart, SetTotalItemInCart] = useState(0);
   const getTotalItems = (arr) => {
     arr.forEach((element) => {
       if (element.isInCart == true) {
@@ -34,8 +36,9 @@ function App() {
       const data = await GetBookData();
       setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    getBooks();
     getTotalItems(bookListData);
+
+    getBooks();
   }, []);
 
   useEffect(() => {
@@ -43,33 +46,29 @@ function App() {
   }, [bookListData]);
 
   return (
-    <AuthProvider>
-      <CartItemsContext.Provider
-        value={{ totalItemInCart, SetTotalItemInCart }}
-      >
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={<HomePage bookListData={bookListData} />}
-          />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route
-            path="/book/:title"
-            element={<SingleBookPage bookListData={bookListData} />}
-          />
-          <Route path="/catogeries" element={<CatogeriesPage />} />
-          <Route
-            path="/catogeries/:catogery"
-            element={<SingleCatogeryPage bookListData={bookListData} />}
-          />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/about" element={<AboutUsPage />} />
-        </Routes>
-        <Footer />
-      </CartItemsContext.Provider>
-    </AuthProvider>
+    <CartItemsContext.Provider value={{ totalItemInCart, SetTotalItemInCart }}>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={<HomePage bookListData={bookListData} />}
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route
+          path="/book/:title"
+          element={<SingleBookPage bookListData={bookListData} />}
+        />
+        <Route path="/catogeries" element={<CatogeriesPage />} />
+        <Route
+          path="/catogeries/:catogery"
+          element={<SingleCatogeryPage bookListData={bookListData} />}
+        />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+      </Routes>
+      <Footer />
+    </CartItemsContext.Provider>
   );
 }
 
