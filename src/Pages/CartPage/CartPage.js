@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
 import "./cartpage.css";
@@ -22,20 +22,19 @@ export default function CartPage({ bookListData }) {
     });
     return total;
   };
-  const getUsers = async () => {
+  const getCartData = useCallback(() => {
     if (!currentUser) return;
-    let tempData = bookListData.map((element) => {
-      if (userData.cartData?.includes(element.id.toString())) {
-        return element;
-      }
-    });
-    setCartDatas(tempData);
-  };
+    setCartDatas(
+      bookListData.map((element) => {
+        if (userData.cartData?.includes(element.id.toString())) {
+          return element;
+        }
+      })
+    );
+  }, []);
   useEffect(() => {
-    getUsers(userData);
-
-    //setTotalPrice(getTotalPrice(cartDatas));
-  }, [cartDatas]);
+    getCartData();
+  }, []);
   useEffect(() => {
     //setTotalPrice(getTotalPrice(cartDatas));
   }, [cartDatas]);
@@ -59,7 +58,7 @@ export default function CartPage({ bookListData }) {
                   title={item.title}
                   author={item.author}
                   price={item.price}
-                  reload={getUsers}
+                  reload={getCartData}
                 />
               );
             })}

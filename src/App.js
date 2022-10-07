@@ -16,28 +16,14 @@ import { GetBookData } from "./Services/GetBookData";
 
 function App() {
   const [bookListData, setBookListData] = useState([]);
-
-  const [totalItemInCart, SetTotalItemInCart] = useState(0);
-  const getTotalItems = (arr) => {
-    arr.forEach((element) => {
-      if (element.isInCart == true) {
-        SetTotalItemInCart((total) => total + 1);
-      }
-    });
-  };
   useEffect(() => {
     const getBooks = async () => {
       const data = await GetBookData();
       setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-    getTotalItems(bookListData);
 
     getBooks();
   }, []);
-
-  useEffect(() => {
-    getTotalItems(bookListData);
-  }, [bookListData]);
 
   return (
     <>
