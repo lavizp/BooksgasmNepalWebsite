@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
 import "./cartpage.css";
-import Button from "@mui/joy/Button";
 import useCartData from "../../Hooks/UseCartData";
 import { useUser } from "../../contexts/UserContext";
 import { useAuth } from "../../contexts/AuthContext";
@@ -22,6 +21,7 @@ export default function CartPage({ bookListData }) {
         cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
       });
     SetTotalItemInCart(totalItemInCart - 1);
+    window.location.reload(false);
   }
   useEffect(() => {
     setTotalPrice(getTotalPrice(cartData));
@@ -37,7 +37,7 @@ export default function CartPage({ bookListData }) {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartData.map((item) => {
+            {cartData?.map((item) => {
               return (
                 <SingleBook
                   key={item.id}
@@ -55,9 +55,7 @@ export default function CartPage({ bookListData }) {
         <div className="price-box-cartpage">
           <h1>Your Total is:</h1>
           <h1>Rs. {totalPrice}</h1>
-          <Button variant="solid" color="primary">
-            CheckOut
-          </Button>
+          <button>CheckOut</button>
         </div>
       </div>
     </>

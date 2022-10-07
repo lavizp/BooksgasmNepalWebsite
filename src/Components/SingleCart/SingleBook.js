@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./singlecart.css";
-import db from "../../Data/firebase";
 
 import { useAuth } from "../../contexts/AuthContext";
 

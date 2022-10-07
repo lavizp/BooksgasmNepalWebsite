@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Typography, Button, Box } from "@mui/material";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -46,47 +45,36 @@ export default function SingleBookElement({ title, id, author, price, image }) {
   useEffect(() => {
     if (userData.cartData?.includes(id)) {
       setcartText("Remove");
+      setAddedToCart(true);
     } else {
       setcartText("Add to Cart");
+      setAddedToCart(false);
     }
-  }, [userData]);
+  }, []);
 
   const navigateToSingleBook = () => {
     navigate("/book/" + id);
   };
   return (
-    <Card
-      variant="solid"
-      sx={{
-        maxWidth: 200,
-        mt: 5,
-        mr: 3,
-      }}
-    >
-      <Card>
-        <img
-          src={image}
-          onClick={navigateToSingleBook}
-          alt=""
-          style={{ width: "100%", height: "300px" }}
-        />
-      </Card>
-      <Typography
-        fontSize="20px"
-        fontWeight="xlg"
+    <div style={{ "margin-right": "20px" }}>
+      <img
+        src={image}
         onClick={navigateToSingleBook}
-      >
+        alt=""
+        style={{ width: "100%", height: "300px" }}
+      />
+      <h5 onClick={navigateToSingleBook}>
         {title.length < 18 ? title : title.slice(0, 17) + "..."}
-      </Typography>
-      <Box>
-        <Box>
-          <Typography>{author}</Typography>
-          <Typography fontWeight="xl">Rs.{price}</Typography>
-        </Box>
-        <Button variant="contained" onClick={cartButton} sx={{ width: "100%" }}>
-          <Typography fontSize="20px">{cartText}</Typography>
-        </Button>
-      </Box>
-    </Card>
+      </h5>
+      <div>
+        <div>
+          <p>{author}</p>
+          <p>Rs.{price}</p>
+        </div>
+        <button style={{ width: "100%" }} onClick={cartButton}>
+          <p>{cartText}</p>
+        </button>
+      </div>
+    </div>
   );
 }

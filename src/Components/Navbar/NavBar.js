@@ -57,13 +57,7 @@ export default function NavBar() {
               <Nav.Link href="#features">Combo-Deals</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="#pricing">Contacts</Nav.Link>
-              <Nav.Link href="/cart">
-                <IconButton aria-label="cart">
-                  <Badge badgeContent={totalItemInCart} color="primary">
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
-              </Nav.Link>
+              <Nav.Link href="/cart">cart:{totalItemInCart}</Nav.Link>
               {currentUser ? (
                 <button onClick={() => signOutHandler()}>Sign Out</button>
               ) : (
