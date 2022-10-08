@@ -37,7 +37,7 @@ export default function CartPage({ bookListData }) {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartData?.map((item) => {
+            {cartData.map((item) => {
               return (
                 <SingleBook
                   key={item.id}

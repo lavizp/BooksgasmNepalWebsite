@@ -12,7 +12,7 @@ import AboutUsPage from "./Pages/AboutUsPage";
 import Footer from "./Components/Footer/Footer";
 import LoginPage from "./Pages/LoginPage/LoginPage";
 import SignUpPage from "./Pages/SignupPage/SignUpPage";
-
+import Admin from "./Pages/AdminPannel/Admin";
 import { GetBookData } from "./Services/GetBookData";
 
 function App() {
@@ -49,6 +49,7 @@ function App() {
           element={<CartPage bookListData={bookListData} />}
         />
         <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       <Footer />
     </>

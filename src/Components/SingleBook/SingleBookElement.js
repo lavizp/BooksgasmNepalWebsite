@@ -56,7 +56,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     navigate("/book/" + id);
   };
   return (
-    <div style={{ "margin-right": "20px" }}>
+    <div style={{ marginRight: "20px" }}>
       <img
         src={image}
         onClick={navigateToSingleBook}

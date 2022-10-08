@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "../contexts/UserContext";
 import db from "../Data/firebase";
 import { collection, getDoc, doc } from "firebase/firestore";
 export default function useCartData(currentUser, bookListData) {
@@ -8,7 +7,6 @@ export default function useCartData(currentUser, bookListData) {
   const [totalPrice, setTotalPrice] = useState(0);
   //const { userData } = useUser();
   const getUserData = async function () {
-    if (!currentUser) return;
     const usersCollectionRef = doc(db, "users", currentUser.uid);
     const data = await getDoc(usersCollectionRef);
     setUserData(data.data());
