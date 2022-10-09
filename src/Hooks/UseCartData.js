@@ -14,7 +14,7 @@ export default function useCartData(currentUser, bookListData) {
   const getTotalPrice = (arr) => {
     let total = 0;
     arr.forEach((element) => {
-      total += element.price;
+      total += Number(element.price);
     });
     return total;
   };
