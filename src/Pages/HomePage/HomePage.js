@@ -13,7 +13,10 @@ export default function HomePage({ bookListData }) {
       <NavBar />
       <BookList title="BestSeller" books={bookListData} />
       <CatogeryList />
-      <BookList title="Recommended" books={bookListData} />
+      <BookList
+        title="Self-Help Books"
+        books={bookListData.filter((itm) => itm.catogery == "self-help")}
+      />
     </>
   );
 }

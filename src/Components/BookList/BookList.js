@@ -9,7 +9,7 @@ export default function BookList({ title, books }) {
         <h1 className="black">{title}</h1> <h1 className="yellow">Books:</h1>
       </div>
       <div className="book-list">
-        {books.slice(0, 5).map((item, index) => (
+        {books.slice(0, 6).map((item, index) => (
           <SingleBookElement
             key={index}
             id={item.id}
