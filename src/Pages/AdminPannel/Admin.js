@@ -31,10 +31,10 @@ export default function Admin() {
         Image:<input type="text" ref={imageRef}></input>
         Catogery:
         <select name="cars" id="cars" ref={catogeryRef}>
-          <option value="volvo">Fiction</option>
-          <option value="saab">Investing</option>
-          <option value="mercedes">Self-Help</option>
-          <option value="audi">Biography</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Investing">Investing</option>
+          <option value="Self-Help">Self-Help</option>
+          <option value="Biography">Biography</option>
         </select>
         <br></br>
         Description:

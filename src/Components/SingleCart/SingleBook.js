@@ -18,7 +18,7 @@ export default function SingleBook({
   return (
     <div className="single-container">
       <img src={image} />
-      <h1>{title}</h1>
+      <h1> {title.length < 18 ? title : title.slice(0, 17) + "..."}</h1>
       <h3>{author}</h3>
       <h5>Rs.{price}</h5>
       <button onClick={removeFromCart}>
