@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 import db from "../Data/firebase";
 import { collection, getDoc, doc } from "firebase/firestore";
 export default function useCartData(currentUser, bookListData) {
-  const [cartData, setCartData] = useState([]);
+  const [cartDatas, setCartDatas] = useState([]);
   const [userData, setUserData] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   //const { userData } = useUser();
-  const getUserData = async function () {
-    const usersCollectionRef = doc(db, "users", currentUser.uid);
-    const data = await getDoc(usersCollectionRef);
-    setUserData(data.data());
-  };
+
   const getTotalPrice = (arr) => {
     let total = 0;
     arr.forEach((element) => {
@@ -19,15 +15,19 @@ export default function useCartData(currentUser, bookListData) {
     return total;
   };
   useEffect(() => {
+    const getUserData = async function () {
+      const usersCollectionRef = doc(db, "users", currentUser.uid);
+      const data = await getDoc(usersCollectionRef);
+      setUserData(data.data());
+      setCartDatas(
+        bookListData.filter((element) =>
+          userData.cartData?.includes(element.id.toString())
+        )
+      );
+    };
     getUserData();
-  }, []);
-  useEffect(() => {
-    setCartData(
-      bookListData.filter((element) =>
-        userData.cartData.includes(element.id.toString())
-      )
-    );
-  }, [userData]);
+  }, [currentUser.uid]);
+  useEffect(() => {}, [userData]);
 
-  return { cartData, getTotalPrice };
+  return { cartDatas, getTotalPrice };
 }

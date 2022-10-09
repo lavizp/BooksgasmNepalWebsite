@@ -10,22 +10,22 @@ import firebase from "firebase/compat/app";
 
 export default function CartPage({ bookListData }) {
   const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(1);
   const { currentUser } = useAuth();
-  const { cartData, getTotalPrice } = useCartData(currentUser, bookListData);
+  const { cartDatas, getTotalPrice } = useCartData(currentUser, bookListData);
   async function removeFromCart(id) {
     await db
       .collection("users")
       .doc(currentUser.uid.toString())
       .update({
-        cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
+        cartDatas: firebase.firestore.FieldValue.arrayRemove(id.toString()),
       });
     SetTotalItemInCart(totalItemInCart - 1);
     window.location.reload(false);
   }
   useEffect(() => {
-    setTotalPrice(getTotalPrice(cartData));
-  }, [cartData]);
+    setTotalPrice(getTotalPrice(cartDatas));
+  }, [cartDatas]);
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function CartPage({ bookListData }) {
           </div>
         ) : (
           <div className="book-list-cartpage">
-            {cartData.map((item) => {
+            {cartDatas.map((item) => {
               return (
                 <SingleBook
                   key={item.id}

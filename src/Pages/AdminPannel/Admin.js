@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import db from "../../Data/firebase";
-import { doc, addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 export default function Admin() {
   const titleRef = useRef();
   const authroRef = useRef();
@@ -14,7 +14,7 @@ export default function Admin() {
     const data = {
       title: titleRef.current.value,
       author: authroRef.current.value,
-      price: priceRef.current.value,
+      price: Number(priceRef.current.value),
       image: imageRef.current.value,
       catogery: catogeryRef.current.value,
       description: descRef.current.value,
