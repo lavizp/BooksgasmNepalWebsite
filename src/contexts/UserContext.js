@@ -9,7 +9,6 @@ export function useUser() {
 }
 
 export function UserProvider({ children }) {
-  const [allUserData, setAllUserData] = useState([]);
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [totalItemInCart, SetTotalItemInCart] = useState(0);
@@ -24,15 +23,11 @@ export function UserProvider({ children }) {
     };
     getUser();
   }, []);
-  // useEffect(() => {
-  //   if (!currentUser) return;
-  //   allUserData.forEach((data) => {
-  //     if (data.id == currentUser.uid) {
-  //       setUserData(data);
-  //       SetTotalItemInCart(data.cartData.length);
-  //     }
-  //   });
-  // }, [allUserData]);
+  useEffect(() => {
+    if (!currentUser) return;
+    if (!userData.cartData) return;
+    SetTotalItemInCart(userData.cartData.length);
+  }, [userData]);
   const value = {
     userData,
     totalItemInCart,

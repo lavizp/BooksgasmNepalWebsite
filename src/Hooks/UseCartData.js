@@ -27,7 +27,7 @@ export default function useCartData(currentUser, bookListData) {
       }
     };
     getUserCartData();
-  }, []);
+  }, [bookListData]);
 
   return { cartDatas, getTotalPrice };
 }

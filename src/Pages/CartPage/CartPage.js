@@ -10,7 +10,7 @@ import firebase from "firebase/compat/app";
 
 export default function CartPage({ bookListData }) {
   const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
-  const [totalPrice, setTotalPrice] = useState(5);
+  const [totalPrice, setTotalPrice] = useState(0);
   const { currentUser } = useAuth();
   const { cartDatas, getTotalPrice } = useCartData(currentUser, bookListData);
   async function removeFromCart(id) {
@@ -23,13 +23,14 @@ export default function CartPage({ bookListData }) {
     SetTotalItemInCart(totalItemInCart - 1);
     window.location.reload(false);
   }
-  // useEffect(() => {
-  //   setTotalPrice(getTotalPrice(cartDatas));
-  // }, [cartDatas]);
+  useEffect(() => {
+    setTotalPrice(getTotalPrice(cartDatas));
+  }, [cartDatas]);
 
   return (
     <>
       <NavBar />
+
       <div className="cartpage-container">
         {totalPrice == 0 ? (
           <div className="no-cart-books">
