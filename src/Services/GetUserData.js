@@ -1,10 +1,10 @@
 import db from "../Data/firebase";
 
-import { getDocs, collection } from "firebase/firestore";
+import { getDoc, collection, doc } from "firebase/firestore";
 
-const GetUserData = async function () {
-  const usersCollectionRef = collection(db, "users");
-  const data = await getDocs(usersCollectionRef);
+const GetUserData = async function (userID) {
+  const usersCollectionRef = doc(db, "users", userID);
+  const data = await getDoc(usersCollectionRef);
   return data;
 };
 

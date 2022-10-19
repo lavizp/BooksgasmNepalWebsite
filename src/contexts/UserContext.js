@@ -18,21 +18,21 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     const getUser = async () => {
-      const dt = await GetUserData();
-      setAllUserData(dt.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const dt = await GetUserData(currentUser.uid);
+      setUserData(dt.data());
       setIsLoading(false);
     };
     getUser();
   }, []);
-  useEffect(() => {
-    if (!currentUser) return;
-    allUserData.forEach((data) => {
-      if (data.id == currentUser.uid) {
-        setUserData(data);
-        SetTotalItemInCart(data.cartData.length);
-      }
-    });
-  }, [allUserData]);
+  // useEffect(() => {
+  //   if (!currentUser) return;
+  //   allUserData.forEach((data) => {
+  //     if (data.id == currentUser.uid) {
+  //       setUserData(data);
+  //       SetTotalItemInCart(data.cartData.length);
+  //     }
+  //   });
+  // }, [allUserData]);
   const value = {
     userData,
     totalItemInCart,

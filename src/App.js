@@ -23,7 +23,6 @@ function App() {
       setBookListData(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getBooks();
-    console.log(bookListData);
   }, []);
 
   return (

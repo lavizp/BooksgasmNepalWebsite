@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import db from "../Data/firebase";
-import { collection, getDoc, doc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
+
+import { GetUserData } from "../Services/GetUserData";
 export default function useCartData(currentUser, bookListData) {
   const [cartDatas, setCartDatas] = useState([]);
-  const [userData, setUserData] = useState({});
-  const [totalPrice, setTotalPrice] = useState(0);
-  //const { userData } = useUser();
 
   const getTotalPrice = (arr) => {
     let total = 0;
@@ -15,19 +14,20 @@ export default function useCartData(currentUser, bookListData) {
     return total;
   };
   useEffect(() => {
-    const getUserData = async function () {
-      const usersCollectionRef = doc(db, "users", currentUser.uid);
-      const data = await getDoc(usersCollectionRef);
-      setUserData(data.data());
-      setCartDatas(
-        bookListData.filter((element) =>
-          userData.cartData?.includes(element.id.toString())
-        )
-      );
+    const getUserCartData = async () => {
+      const dataSnapshot = await GetUserData(currentUser.uid);
+      if (dataSnapshot.exists) {
+        let ctdt = bookListData.filter((element) => {
+          return dataSnapshot.data().cartData.includes(element.id);
+        });
+        console.log(dataSnapshot.data().cartData);
+        setCartDatas(ctdt);
+      } else {
+        console.log("data dosent exist");
+      }
     };
-    getUserData();
-  }, [currentUser.uid]);
-  useEffect(() => {}, [userData]);
+    getUserCartData();
+  }, []);
 
   return { cartDatas, getTotalPrice };
 }

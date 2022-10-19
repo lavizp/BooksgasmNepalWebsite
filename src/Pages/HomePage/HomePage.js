@@ -14,7 +14,7 @@ export default function HomePage({ bookListData }) {
       <BookList title="BestSeller" books={bookListData} />
       <CatogeryList />
       <BookList
-        title="Self-Help Books"
+        title="Self-Help"
         books={bookListData.filter((itm) => itm.catogery == "self-help")}
       />
     </>
