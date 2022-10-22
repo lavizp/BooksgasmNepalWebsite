@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./singlecart.css";
-
+import db from "../../Data/firebase";
 import { useAuth } from "../../contexts/AuthContext";
+import { useUser } from "../../contexts/UserContext";
+import firebase from "firebase/compat/app";
 
-export default function SingleBook({
-  image,
-  title,
-  price,
-  author,
-  id,
-  reload,
-}) {
+export default function SingleBook({ image, title, price, author, id }) {
+  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
   const { currentUser } = useAuth();
+
   const removeFromCart = async () => {
-    reload(id);
+    console.log(currentUser.uid);
+    await db
+      .collection("users")
+      .doc(currentUser.uid)
+      .update({
+        cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
+      });
+    SetTotalItemInCart(totalItemInCart - 1);
+    location.reload();
   };
   return (
     <div className="single-container">

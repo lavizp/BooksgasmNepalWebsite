@@ -9,20 +9,9 @@ import db from "../../Data/firebase";
 import firebase from "firebase/compat/app";
 
 export default function CartPage({ bookListData }) {
-  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
   const [totalPrice, setTotalPrice] = useState(0);
   const { currentUser } = useAuth();
   const { cartDatas, getTotalPrice } = useCartData(currentUser, bookListData);
-  async function removeFromCart(id) {
-    await db
-      .collection("users")
-      .doc(currentUser.uid.toString())
-      .update({
-        cartDatas: firebase.firestore.FieldValue.arrayRemove(id.toString()),
-      });
-    SetTotalItemInCart(totalItemInCart - 1);
-    window.location.reload(false);
-  }
   useEffect(() => {
     setTotalPrice(getTotalPrice(cartDatas));
   }, [cartDatas]);
@@ -47,7 +36,6 @@ export default function CartPage({ bookListData }) {
                   title={item.title}
                   author={item.author}
                   price={item.price}
-                  reload={removeFromCart}
                 />
               );
             })}
