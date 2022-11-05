@@ -1,2 +1,2 @@
 #BooksGasm Nepal
-E-commerce website made for books using React-JS.
+E-commerce website made for books using React-JS and Firebase.
