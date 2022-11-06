@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import db from "../Data/firebase";
 import { getDoc, doc } from "firebase/firestore";
 
@@ -14,6 +15,7 @@ export default function useCartData(currentUser, bookListData) {
     return total;
   };
   useEffect(() => {
+    if (!currentUser) return;
     const getUserCartData = async () => {
       const dataSnapshot = await GetUserData(currentUser.uid);
       if (dataSnapshot.exists) {

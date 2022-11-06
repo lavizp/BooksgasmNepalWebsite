@@ -3,8 +3,11 @@ import NavBar from "../../Components/Navbar/NavBar";
 import SingleBook from "../../Components/SingleCart/SingleBook";
 import "./cartpage.css";
 import useCartData from "../../Hooks/UseCartData";
+
 import { useUser } from "../../contexts/UserContext";
+
 import { useAuth } from "../../contexts/AuthContext";
+
 import db from "../../Data/firebase";
 import firebase from "firebase/compat/app";
 

@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import logo from "./logo.png";
 import "./navbar.css";
-import { IconButton, Badge } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -57,7 +55,9 @@ export default function NavBar() {
               <Nav.Link href="#features">Combo-Deals</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="#pricing">Contacts</Nav.Link>
-              <Nav.Link href="/cart">cart:{totalItemInCart}</Nav.Link>
+              <Nav.Link href="/cart">
+                cart{currentUser ? ":" + totalItemInCart : ""}
+              </Nav.Link>
               {currentUser ? (
                 <button onClick={() => signOutHandler()}>Sign Out</button>
               ) : (

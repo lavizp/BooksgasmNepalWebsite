@@ -17,17 +17,24 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     const getUser = async () => {
+      if (!currentUser) {
+        setIsLoading(false);
+        return;
+      }
+
       const dt = await GetUserData(currentUser.uid);
       setUserData(dt.data());
+      SetTotalItemInCart(dt.data().cartData.length);
+
       setIsLoading(false);
     };
     getUser();
   }, []);
-  useEffect(() => {
-    if (!currentUser) return;
-    if (!userData.cartData) return;
-    SetTotalItemInCart(userData.cartData.length);
-  }, [userData]);
+  // useEffect(() => {
+  //   if (!currentUser) return;
+  //   if (!userData.cartData) return;
+  //   SetTotalItemInCart(userData.cartData.length);
+  // }, [userData]);
   const value = {
     userData,
     totalItemInCart,
