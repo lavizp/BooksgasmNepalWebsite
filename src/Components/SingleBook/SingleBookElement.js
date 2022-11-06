@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import db from "../../Data/firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-// import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../contexts/UserContext";
 import firebase from "firebase/compat/app";
 
 export default function SingleBookElement({ title, id, author, price, image }) {
@@ -11,7 +11,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
   const navigate = useNavigate();
 
   const { currentUser } = useAuth();
-  // const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
+  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
 
   const cartButton = async () => {
     if (!currentUser) {
@@ -42,15 +42,15 @@ export default function SingleBookElement({ title, id, author, price, image }) {
       SetTotalItemInCart(totalItemInCart - 1);
     }
   };
-  // useEffect(() => {
-  //   if (userData.cartData?.includes(id)) {
-  //     setcartText("Remove");
-  //     setAddedToCart(true);
-  //   } else {
-  //     setcartText("Add to Cart");
-  //     setAddedToCart(false);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userData.cartData?.includes(id)) {
+      setcartText("Remove");
+      setAddedToCart(true);
+    } else {
+      setcartText("Add to Cart");
+      setAddedToCart(false);
+    }
+  }, []);
 
   const navigateToSingleBook = () => {
     navigate("/book/" + id);

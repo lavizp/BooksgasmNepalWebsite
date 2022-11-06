@@ -45,9 +45,18 @@ export default function CartPage({ bookListData }) {
           </div>
         )}
         <div className="price-box-cartpage">
-          <h1>Your Total is:</h1>
-          <h1>Rs. {totalPrice}</h1>
-          <button>CheckOut</button>
+          {!currentUser ? (
+            <>
+              <div>Please Sign In To Add Books To Your Cart</div>
+              <button>Sign In</button>
+            </>
+          ) : (
+            <>
+              <h1>Your Total is:</h1>
+              <h1>Rs. {totalPrice}</h1>
+              <button>CheckOut</button>
+            </>
+          )}
         </div>
       </div>
     </>
