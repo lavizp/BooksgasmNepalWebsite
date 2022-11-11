@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import bookListDataTemp from "./MOCK_DATA.json";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./Pages/HomePage/HomePage";
 import SingleBookPage from "./Pages/SingleBookPage/SingleBookPage";

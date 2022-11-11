@@ -27,12 +27,14 @@ export default function LoginPage() {
   return (
     <div>
       <NavBar />
-      <h1>Login</h1>
-      <input type="email" ref={emailRef} placeholder="email"></input>
-      <input type="password" ref={passwordRef} placeholder="password"></input>
-      <button type="submit" onClick={(e) => handleSubmit(e)}>
-        Submit
-      </button>
+      <div className="loginBox">
+        <h1>Login</h1>
+        <input type="email" ref={emailRef} placeholder="email"></input>
+        <input type="password" ref={passwordRef} placeholder="password"></input>
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
