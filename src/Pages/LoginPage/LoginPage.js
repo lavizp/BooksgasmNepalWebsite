@@ -25,16 +25,41 @@ export default function LoginPage() {
     setIsLoading(false);
   }
   return (
-    <div>
+    <>
       <NavBar />
-      <div className="loginBox">
-        <h1>Login</h1>
-        <input type="email" ref={emailRef} placeholder="email"></input>
-        <input type="password" ref={passwordRef} placeholder="password"></input>
-        <button type="submit" onClick={(e) => handleSubmit(e)}>
-          Submit
-        </button>
+      <div className="loginPage">
+        <div className="loginBox">
+          <h1>Login:</h1>
+
+          <input
+            type="email"
+            ref={emailRef}
+            placeholder="email"
+            className="inputBox"
+          />
+
+          <input
+            type="password"
+            ref={passwordRef}
+            placeholder="password"
+            className="inputBox"
+          />
+          <button
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+            className="loginButton"
+          >
+            Submit
+          </button>
+          <p className="pText">
+            Do not have an account?
+            <a onClick={() => navigate("/signup")} className="aText">
+              {" "}
+              Sign Up
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
