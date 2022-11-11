@@ -11,7 +11,7 @@ export default function SingleCatogeryPage({ bookListData }) {
 
   const catogeryTitle = catogery.charAt(0).toUpperCase() + catogery.slice(1);
   return (
-    <>
+    <div style={{ marginBottom: "50px" }}>
       <NavBar />
 
       <div className="page-container">
@@ -20,6 +20,6 @@ export default function SingleCatogeryPage({ bookListData }) {
           books={bookListData.filter((itm) => itm.catogery == catogery)}
         />
       </div>
-    </>
+    </div>
   );
 }

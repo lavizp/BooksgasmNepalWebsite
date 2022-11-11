@@ -44,3 +44,10 @@
   text-align: center;
   margin: 0 auto;
 }
+
+.addToCartButton {
+  width: 100%;
+  border: none;
+  text-align: center;
+  padding-top: 10px;
+}

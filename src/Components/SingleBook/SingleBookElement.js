@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useUser } from "../../contexts/UserContext";
 import firebase from "firebase/compat/app";
-
+import "./singlebook.css";
 export default function SingleBookElement({ title, id, author, price, image }) {
   const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
@@ -71,7 +71,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
           <p>{author}</p>
           <p>Rs.{price}</p>
         </div>
-        <button style={{ width: "100%" }} onClick={cartButton}>
+        <button className="addToCartButton" onClick={cartButton}>
           <p>{cartText}</p>
         </button>
       </div>

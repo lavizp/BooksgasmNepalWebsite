@@ -7,7 +7,7 @@ import "./homepage.css";
 
 export default function HomePage({ bookListData }) {
   return (
-    <>
+    <div style={{ marginBottom: "50px" }}>
       <BannerMain />
       <div id="startshopping" />
       <NavBar />
@@ -17,6 +17,6 @@ export default function HomePage({ bookListData }) {
         title="Self-Help"
         books={bookListData.filter((itm) => itm.catogery == "self-help")}
       />
-    </>
+    </div>
   );
 }
