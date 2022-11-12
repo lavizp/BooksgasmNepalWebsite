@@ -4,7 +4,7 @@ import "./booklist.css";
 
 export default function BookList({ title, books }) {
   return (
-    <>
+    <div className="bookListContainer">
       <div className="list-title">
         <h1 className="black">{title}</h1> <h1 className="yellow">Books:</h1>
       </div>
@@ -20,6 +20,6 @@ export default function BookList({ title, books }) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }

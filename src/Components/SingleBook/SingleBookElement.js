@@ -56,7 +56,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
     navigate("/book/" + id);
   };
   return (
-    <div style={{ marginRight: "20px" }}>
+    <div className="sisngle-containe">
       <img
         src={image}
         onClick={navigateToSingleBook}
@@ -64,7 +64,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
         style={{ width: "100%", height: "300px" }}
       />
       <h5 onClick={navigateToSingleBook}>
-        {title.length < 18 ? title : title.slice(0, 17) + "..."}
+        {title.length < 18 ? title : title.slice(0, 13) + "..."}
       </h5>
       <div>
         <div>
