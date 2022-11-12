@@ -61,7 +61,7 @@ export default function SingleBookElement({ title, id, author, price, image }) {
         src={image}
         onClick={navigateToSingleBook}
         alt=""
-        style={{ width: "100%", height: "300px" }}
+        style={{ width: "192px", height: "300px" }}
       />
       <h5 onClick={navigateToSingleBook}>
         {title.length < 18 ? title : title.slice(0, 13) + "..."}
