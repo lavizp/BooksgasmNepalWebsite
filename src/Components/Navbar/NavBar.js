@@ -54,7 +54,6 @@ export default function NavBar() {
               </NavDropdown>
               <Nav.Link href="#features">Combo-Deals</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="#pricing">Contacts</Nav.Link>
               <Nav.Link href="/cart">
                 cart{currentUser ? ":" + totalItemInCart : ""}
               </Nav.Link>
