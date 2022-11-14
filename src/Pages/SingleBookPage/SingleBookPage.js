@@ -1,17 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./singlebookpage.css";
-import NavBar from "../../Components/Navbar/NavBar";
+import db from "../../Data/firebase";
+import firebase from "firebase/compat/app";
 
+import NavBar from "../../Components/Navbar/NavBar";
+import { useUser } from "../../contexts/UserContext";
+import { useAuth } from "../../contexts/AuthContext";
 export default function SingleBookPage({ bookListData }) {
   const { title } = useParams();
-
+  const [cartText, setcartText] = useState("Add to Cart");
+  const [addedToCart, setAddedToCart] = useState(false);
   const [book, setBook] = useState({});
+  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
+  const { currentUser } = useAuth();
+
   useEffect(() => {
     let tempBookData = bookListData.filter((data) => data.id == title);
     setBook(tempBookData[0]);
+    if (userData.cartData?.includes(title)) {
+      setcartText("Remove");
+      setAddedToCart(true);
+    } else {
+      setcartText("Add to Cart");
+      setAddedToCart(false);
+    }
   }, [bookListData]);
-
+  const cartButton = async () => {
+    if (!currentUser) {
+      navigate("/signup");
+      return;
+    }
+    if (!addedToCart) {
+      setcartText("Adding");
+      await db
+        .collection("users")
+        .doc(currentUser.uid.toString())
+        .update({
+          cartData: firebase.firestore.FieldValue.arrayUnion(title.toString()),
+        });
+      setAddedToCart(true);
+      setcartText("Remove");
+      SetTotalItemInCart(totalItemInCart + 1);
+    } else {
+      setcartText("Removing");
+      await db
+        .collection("users")
+        .doc(currentUser.uid.toString())
+        .update({
+          cartData: firebase.firestore.FieldValue.arrayRemove(title.toString()),
+        });
+      setcartText("Add to Cart");
+      setAddedToCart(false);
+      SetTotalItemInCart(totalItemInCart - 1);
+    }
+  };
   return (
     <>
       <NavBar />
@@ -39,7 +82,7 @@ export default function SingleBookPage({ bookListData }) {
           </p>
           <div className="singlebook-pricebox">
             <h1>Price : Rs{book?.price}</h1>
-            <button>{book?.isInCart ? "Remove" : "Add to Cart"}</button>
+            <button onClick={cartButton}>{cartText}</button>
           </div>
         </div>
       </div>
