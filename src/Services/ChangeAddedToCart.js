@@ -1,27 +1,38 @@
 import db from "../Data/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import firebase from "firebase/compat/app";
-import { useUser } from "../contexts/UserContext";
-const setAddedToCart = async function (addedToCart) {
-  const { userData, totalItemInCart, SetTotalItemInCart } = useUser();
+const ChangeAddedToCart = async function (
+  bookId,
+  addedToCart,
+  totalItemInCart,
+  currentUser
+) {
+  let text = "";
+  let added = addedToCart;
+  let totalItems = totalItemInCart;
   if (!addedToCart) {
     await db
       .collection("users")
-      .doc(currentUser.uid.toString())
+      .doc(currentUser.toString())
       .update({
-        cartData: firebase.firestore.FieldValue.arrayUnion(id.toString()),
+        cartData: firebase.firestore.FieldValue.arrayUnion(bookId.toString()),
       });
+    totalItems++;
 
-    SetTotalItemInCart(totalItemInCart + 1);
+    text = "Remove";
   } else {
     await db
       .collection("users")
-      .doc(currentUser.uid.toString())
+      .doc(currentUser.toString())
       .update({
-        cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
+        cartData: firebase.firestore.FieldValue.arrayRemove(bookId.toString()),
       });
-    SetTotalItemInCart(totalItemInCart - 1);
+    totalItems--;
+    text = "Add to Cart";
   }
+  added = !added;
+
+  return { text, added, totalItems };
 };
 
-export { setAddedToCart };
+export { ChangeAddedToCart };

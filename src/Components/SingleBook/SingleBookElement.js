@@ -5,6 +5,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useUser } from "../../contexts/UserContext";
 import firebase from "firebase/compat/app";
 import "./singlebook.css";
+import { ChangeAddedToCart } from "../../Services/ChangeAddedToCart";
+import { Add } from "@mui/icons-material";
 export default function SingleBookElement({ title, id, author, price, image }) {
   const [cartText, setcartText] = useState("Add to Cart");
   const [addedToCart, setAddedToCart] = useState(false);
@@ -18,29 +20,16 @@ export default function SingleBookElement({ title, id, author, price, image }) {
       navigate("/signup");
       return;
     }
-    if (!addedToCart) {
-      setcartText("Adding");
-      await db
-        .collection("users")
-        .doc(currentUser.uid.toString())
-        .update({
-          cartData: firebase.firestore.FieldValue.arrayUnion(id.toString()),
-        });
-      setAddedToCart(true);
-      setcartText("Remove");
-      SetTotalItemInCart(totalItemInCart + 1);
-    } else {
-      setcartText("Removing");
-      await db
-        .collection("users")
-        .doc(currentUser.uid.toString())
-        .update({
-          cartData: firebase.firestore.FieldValue.arrayRemove(id.toString()),
-        });
-      setcartText("Add to Cart");
-      setAddedToCart(false);
-      SetTotalItemInCart(totalItemInCart - 1);
-    }
+    addedToCart ? setcartText("Removing") : setcartText("Adding to Cart");
+    const { text, added, totalItems } = await ChangeAddedToCart(
+      id,
+      addedToCart,
+      totalItemInCart,
+      currentUser.uid
+    );
+    setcartText(text);
+    setAddedToCart(added);
+    SetTotalItemInCart(totalItems);
   };
   useEffect(() => {
     if (userData.cartData?.includes(id)) {
