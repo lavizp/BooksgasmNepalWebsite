@@ -8,9 +8,9 @@ import "./homepage.css";
 export default function HomePage({ bookListData }) {
   return (
     <div style={{ marginBottom: "50px" }}>
+      <NavBar />
       <BannerMain />
       <div id="startshopping" />
-      <NavBar />
       <BookList title="BestSeller" books={bookListData} />
       <CatogeryList />
       <BookList
