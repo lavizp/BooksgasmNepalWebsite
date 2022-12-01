@@ -7,8 +7,9 @@
   margin-top: 30px;
 }
 
-.book_image {
+.book_image_single {
   height: 500px;
+  width: 1800px;
 }
 .singlebook-container {
   margin-top: 40px;

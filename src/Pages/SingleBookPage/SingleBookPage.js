@@ -63,7 +63,7 @@ export default function SingleBookPage({ bookListData }) {
 
       <div className="singlebook-container">
         <div className="book_data">
-          <img src={book?.image} className="book_image"></img>
+          <img src={book?.image} className="book_image_single"></img>
         </div>
         <div className="book-description">
           <p>
