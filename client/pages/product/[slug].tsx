@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Wrapper from '@/components/wraper';
 import ReactMarkdown from "react-markdown";
 import Image from 'next/image';
+import RelatedProducts from '@/components/relatedProduct';
 
 export default function ProductDetail(){
     const notify = () => {
@@ -108,6 +109,7 @@ export default function ProductDetail(){
         </div>
 
         {/* <RelatedProducts products={products} /> */}
+        <RelatedProducts/>
     </Wrapper>
 </div>
   )
