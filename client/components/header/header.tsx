@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from 'next/image';
 
 import { Menu } from './menu';
-import Wrapper from './wraper'
+import Wrapper from '../wraper'
 import MenuMobile from './menuMobile';
 
 import { IoMdHeartEmpty } from "react-icons/io";

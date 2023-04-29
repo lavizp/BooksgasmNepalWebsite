@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import SearchBox from "./searchBox";
+
 import { BsChevronDown } from "react-icons/bs";
 
 const data = [
@@ -82,6 +84,7 @@ const MenuMobile: React.FC<Props> = ({
                     </React.Fragment>
                 );
             })}
+            <SearchBox/>
         </ul>
     );
 };

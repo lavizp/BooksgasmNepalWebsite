@@ -10,8 +10,8 @@ const ProductCard = () => {
             <Image
                 width={500}
                 height={500}
-                src="/p7.png"
-                alt="asd"
+                src="/book.webp"
+                alt="book"
             />
             <div className="p-4 text-black/[0.9]">
                 <h2 className="text-lg font-medium">Sahi Product</h2>

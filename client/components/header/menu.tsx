@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import SearchBox from "./searchBox";
+
 import { BsChevronDown } from "react-icons/bs";
 
 const data = [
     { id: 1, name: "Home", url: "/" },
     { id: 2, name: "About", url: "/about" },
     { id: 3, name: "Categories", subMenu: true },
-    { id: 4, name: "Contact", url: "/contact" },
 ];
 
 const subMenuData = [
@@ -59,6 +60,7 @@ export const Menu: React.FC<Props> = ({ showCatMenu, setShowCatMenu }) => {
                             </ul>
                         )}
                     </li>
+                    
                 ) : (
                     <li className="cursor-pointer">
                         <Link href={item.url? item.url : ""}>{item.name}</Link>
@@ -67,6 +69,8 @@ export const Menu: React.FC<Props> = ({ showCatMenu, setShowCatMenu }) => {
             </React.Fragment>
         );
     })}
+    <SearchBox/>
+    
 </ul>
   )
 }
