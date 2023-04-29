@@ -1,6 +1,7 @@
-export default [
+module.exports = [
   "strapi::errors",
   {
+    name: "strapi::security",
     config: {
       contentSecurityPolicy: {
         useDefaults: true,
@@ -8,7 +9,7 @@ export default [
           "connect-src": ["'self'", "https:"],
           "img-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
           "media-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
-          "upgrade-insecure-requests": "",
+          upgradeInsecureRequests: null,
         },
       },
     },
