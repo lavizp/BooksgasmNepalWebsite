@@ -1,11 +1,14 @@
+import {useState, useEffect} from 'react'
+
 import ProductCard from '@/components/productCard'
 import Wrapper from '@/components/wraper'
 import HeroBanner from '@/components/heroBanner'
-export default function Home() {
+import { fetchDataFromApi } from '@/utils/api'
+export default function Home({products}: any) {
   return (
     <main>
-      <Wrapper>
         <HeroBanner/>
+        <Wrapper>
                         {/* heading and paragaph start */}
                         <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
                     <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
@@ -21,21 +24,30 @@ export default function Home() {
 
                 {/* products grid start */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-14 px-5 md:px-20">
-                    {/* {products?.data?.map((product) => (
+                    {products?.data?.map((product: any) => (
                         <ProductCard key={product?.id} data={product} />
-                    ))} */}
+                    ))}
+                    {/* <ProductCard />
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    <ProductCard /> */}
                     
                 </div>
                 {/* products grid end */}
-      </Wrapper>
+        </Wrapper>
     </main>
   )
+
+  
+}
+export async function getStaticProps() {
+  const products = await fetchDataFromApi("/api/products?populate=*");
+
+  return {
+      props: { products },
+  };
 }

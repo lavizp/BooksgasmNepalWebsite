@@ -20,8 +20,9 @@ const subMenuData = [
 interface Props{
     showCatMenu: boolean,
     setShowCatMenu: (item: boolean)=> void,
+    categories: any
 }
-export const Menu: React.FC<Props> = ({ showCatMenu, setShowCatMenu }) => {
+export const Menu: React.FC<Props> = ({ showCatMenu, setShowCatMenu, categories }) => {
   return (
     <ul className="hidden md:flex items-center gap-8 font-medium text-black">
     {data.map((item) => {
@@ -38,25 +39,28 @@ export const Menu: React.FC<Props> = ({ showCatMenu, setShowCatMenu }) => {
 
                         {showCatMenu && (
                             <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
-                                {subMenuData?.map(
-                                    (item: any) => {
-                                        return (
-                                            <Link
-                                                key={item.id}
-                                                href={`/category/${item.name}`}
-                                                onClick={() =>
-                                                    setShowCatMenu(
-                                                        false
-                                                    )
-                                                }
-                                            >
-                                                <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
-                                                            {item.name}
+                                        {categories?.map(
+                                            ({ attributes: c, id }: any) => {
+                                                return (
+                                                    <Link
+                                                        key={id}
+                                                        href={`/category/${c.slug}`}
+                                                        onClick={() =>
+                                                            setShowCatMenu(
+                                                                false
+                                                            )
+                                                        }
+                                                    >
+                                                        <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
+                                                            {c.name}
+                                                            <span className="opacity-50 text-sm">
+                                                                {`(${c.products.data.length})`}
+                                                            </span>
                                                         </li>
-                                            </Link>
-                                        );
-                                    }
-                                )}
+                                                    </Link>
+                                                );
+                                            }
+                                        )}
                             </ul>
                         )}
                     </li>

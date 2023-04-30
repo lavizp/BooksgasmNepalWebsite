@@ -22,12 +22,14 @@ interface Props{
     showCatMenu: boolean,
     setShowCatMenu: (item: boolean)=> void,
     setMobileMenu: (item: boolean)=> void,
+    categories: any
 }
 
 const MenuMobile: React.FC<Props> = ({
     showCatMenu,
     setShowCatMenu,
     setMobileMenu,
+    categories
 }) => {
     return (
         <ul className="flex flex-col md:hidden font-bold absolute top-[50px] left-0 w-full h-[calc(100vh-50px)] bg-white border-t text-black">
@@ -46,12 +48,12 @@ const MenuMobile: React.FC<Props> = ({
 
                                 {showCatMenu && (
                                     <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                                        {subMenuData?.map(
-                                            (item: any) => {
+                                        {categories?.map(
+                                            ({ attributes: c, id }: any) => {
                                                 return (
                                                     <Link
-                                                        key={item.name}
-                                                        href={`/category/${item.name}`}
+                                                        key={id}
+                                                        href={`/category/${c.slug}`}
                                                         onClick={() => {
                                                             setShowCatMenu(
                                                                 false
@@ -62,7 +64,10 @@ const MenuMobile: React.FC<Props> = ({
                                                         }}
                                                     >
                                                         <li className="py-4 px-8 border-t flex justify-between">
-                                                            {item.name}
+                                                            {c.name}
+                                                            <span className="opacity-50 text-sm">
+                                                                {`(${c.products.data.length})`}
+                                                            </span>
                                                         </li>
                                                     </Link>
                                                 );

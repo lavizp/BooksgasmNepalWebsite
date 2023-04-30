@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useState } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Wrapper from '@/components/wraper';
 import ReactMarkdown from "react-markdown";
 import Image from 'next/image';
-import RelatedProducts from '@/components/relatedProduct';
+// import RelatedProducts from '@/components/relatedProduct';
+import { fetchDataFromApi } from "@/utils/api";
+import { getDiscountedPricePercentage } from "@/utils/helper";
 
-export default function ProductDetail(){
+export default function ProductDetail({ product, products }: any){
+    const [selectedSize, setSelectedSize] = useState();
+    const [showError, setShowError] = useState(false);
+    // const dispatch = useDispatch();
+    const p = product?.data?.[0]?.attributes;
     const notify = () => {
         toast.success("Success. Check your cart!", {
             position: "bottom-right",
@@ -27,36 +33,36 @@ export default function ProductDetail(){
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
             {/* Left column start */}
             <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                <Image src="/book.webp" width="500" height="300" alt='image' />
+                <Image src={"/book.webp"} width="500" height="300" alt='image' />
             </div>
             {/* left Column End */}
             {/* right column start */}
             <div className="flex-[1] py-3">
                 {/* PRODUCT TITLE */}
                 <div className="text-[34px] font-semibold mb-2 leading-tight">
-                    Name
+                    {p.name}
                 </div>
 
                 {/* PRODUCT SUBTITLE */}
                 <div className="text-lg font-semibold mb-5">
-                    Subtitle
+                    {p.subtitle}
                 </div>
 
                 {/* PRODUCT PRICE */}
                 <div className="flex items-center">
                     <p className="mr-2 text-lg font-semibold">
-                        MRP : &#8377;Price
+                        MRP : &#8377;{p.price}
                     </p>
                     {true && (
                         <>
                             <p className="text-base  font-medium line-through">
-                                &#8377;OriginalPrice
+                                &#8377;{p.original_price}
                             </p>
                             <p className="ml-auto text-base font-medium text-green-500">
-                                {/* {getDiscountedPricePercentage(
+                                {getDiscountedPricePercentage(
                                     p.original_price,
                                     p.price
-                                )} */}10
+                                )}
                                 % off
                             </p>
                         </>
@@ -109,8 +115,37 @@ export default function ProductDetail(){
         </div>
 
         {/* <RelatedProducts products={products} /> */}
-        <RelatedProducts/>
+        {/* <RelatedProducts/> */}
     </Wrapper>
 </div>
   )
+}
+export async function getStaticPaths() {
+    const products = await fetchDataFromApi("/api/products?populate=*");
+    const paths = products?.data?.map((p: any) => ({
+        params: {
+            slug: p.attributes.slug,
+        },
+    }));
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params: { slug } }: any) {
+    const product = await fetchDataFromApi(
+        `/api/products?populate=*&filters[slug][$eq]=${slug}`
+    );
+    const products = await fetchDataFromApi(
+        `/api/products?populate=*&[filters][slug][$ne]=${slug}`
+    );
+
+    return {
+        props: {
+            product,
+            products,
+        },
+    };
 }
