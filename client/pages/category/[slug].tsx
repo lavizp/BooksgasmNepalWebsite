@@ -4,10 +4,16 @@ import Wrapper from '@/components/wraper';
 import ProductCard from '@/components/productCard';
 import useSWR from "swr";
 import { fetchDataFromApi } from '@/utils/api';
+import { BookType } from "@/interfaces/book";
+import { CategoryType } from "@/interfaces/category";
 const maxResult = 3;
 
-
-export default function Category({ category, products, slug }: any){
+interface Props{
+    category: CategoryType[],
+    products: BookType[],
+    slug: string
+}
+const Category: React.FC<Props>=({ category, products, slug })=>{
     const [pageIndex, setPageIndex] = useState(1);
     const { query } = useRouter();
 
@@ -27,7 +33,7 @@ export default function Category({ category, products, slug }: any){
             <Wrapper>
                 <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
                     <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-                        {category?.data?.[0]?.attributes?.name}
+                        {category?.[0]?.attributes?.name}
                     </div>
                 </div>
 
@@ -36,15 +42,6 @@ export default function Category({ category, products, slug }: any){
                     {data?.data?.map((product: any) => (
                         <ProductCard key={product?.id} data={product} />
                     ))}
-                    {/* <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard /> */}
                 </div>
                 {/* products grid end */}
 
@@ -86,6 +83,7 @@ export default function Category({ category, products, slug }: any){
         </div>
   )
 }
+export default Category
 
 export async function getStaticPaths() {
     const category = await fetchDataFromApi("/api/categories?populate=*");

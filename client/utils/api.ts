@@ -1,6 +1,6 @@
 import { API_URL, STRAPI_API_TOKEN } from "./urls";
 
-export const fetchDataFromApi = async(endpoint: string)=> {
+export const fetchDataFromApi = async(endpoint: string) => {
     const options = {
         method: "GET",
         headers: {

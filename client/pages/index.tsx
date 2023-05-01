@@ -27,14 +27,6 @@ export default function Home({products}: any) {
                     {products?.data?.map((product: any) => (
                         <ProductCard key={product?.id} data={product} />
                     ))}
-                    {/* <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard /> */}
                     
                 </div>
                 {/* products grid end */}

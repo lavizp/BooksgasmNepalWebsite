@@ -2,7 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { getDiscountedPricePercentage } from "@/utils/helper";
-const ProductCard = ({ data: { attributes: p, id }}: any) => {
+import { BookType } from "@/interfaces/book";
+
+interface Props{
+    data: BookType
+}
+
+const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}: any) => {
     return (
         <Link
         href={`/product/${p.slug}`}

@@ -8,6 +8,7 @@ import Image from 'next/image';
 // import RelatedProducts from '@/components/relatedProduct';
 import { fetchDataFromApi } from "@/utils/api";
 import { getDiscountedPricePercentage } from "@/utils/helper";
+import RelatedProducts from "@/components/relatedProduct";
 
 export default function ProductDetail({ product, products }: any){
     const [selectedSize, setSelectedSize] = useState();
@@ -33,7 +34,7 @@ export default function ProductDetail({ product, products }: any){
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
             {/* Left column start */}
             <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                <Image src={"/book.webp"} width="500" height="300" alt='image' />
+                <Image src={p.image.data.attributes.formats.thumbnail.url} width="500" height="300" alt='image' />
             </div>
             {/* left Column End */}
             {/* right column start */}
@@ -114,7 +115,7 @@ export default function ProductDetail({ product, products }: any){
             {/* right column end */}
         </div>
 
-        {/* <RelatedProducts products={products} /> */}
+        <RelatedProducts products={products} />
         {/* <RelatedProducts/> */}
     </Wrapper>
 </div>
