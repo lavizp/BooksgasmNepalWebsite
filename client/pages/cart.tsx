@@ -25,9 +25,10 @@ function Cart() {
                         <div className="text-lg font-bold">
                             Cart Items
                         </div>
-                        {/* {cartItems.map((item) => (
+                        {cartItems.map((item) => (
                             <CartItem key={item.id} data={item} />
-                        ))} */}
+                        ))}
+                        {/* <CartItem/>
                         <CartItem/>
                         <CartItem/>
                         <CartItem/>
@@ -36,8 +37,7 @@ function Cart() {
                         <CartItem/>
                         <CartItem/>
                         <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
+                        <CartItem/> */}
 
                     </div>
                     {/* CART ITEMS END */}

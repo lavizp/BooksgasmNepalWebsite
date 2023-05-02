@@ -8,7 +8,7 @@ interface Props{
     data: BookType
 }
 
-const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}: any) => {
+const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}) => {
     return (
         <Link
         href={`/product/${p.slug}`}
@@ -17,7 +17,7 @@ const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}: any) => {
         <Image
             width={500}
             height={500}
-            src={p.image.data.attributes.formats.thumbnail.url}
+            src={p.image.data.attributes.formats.large.url}
             alt={p.name}
         />
         <div className="p-4 text-black/[0.9]">

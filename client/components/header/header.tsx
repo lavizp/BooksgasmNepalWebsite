@@ -23,7 +23,6 @@ export const Header = () => {
 
     const fetchCategories = async () => {
         const { data } = await fetchDataFromApi("/api/categories?populate=*");
-        console.log(data)
         setCategories(data);
     };
 

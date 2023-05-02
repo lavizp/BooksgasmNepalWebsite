@@ -2,7 +2,13 @@ import Image from "next/image";
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-const CartItem = () => {
+import { BookType } from "@/interfaces/book";
+
+interface Props{
+    data: BookType
+}
+
+const CartItem: React.FC<Props> = ({ data: { attributes: p, id }}) => {
 //     const p = data.attributes;
 
 //     const dispatch = useDispatch();
@@ -33,7 +39,7 @@ const CartItem = () => {
                 <div className="flex flex-col md:flex-row justify-between">
                     {/* PRODUCT TITLE */}
                     <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
-                        Name
+                        {p.name}
                     </div>
 
                     {/* PRODUCT SUBTITLE */}

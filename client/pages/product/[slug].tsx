@@ -9,12 +9,17 @@ import Image from 'next/image';
 import { fetchDataFromApi } from "@/utils/api";
 import { getDiscountedPricePercentage } from "@/utils/helper";
 import RelatedProducts from "@/components/relatedProduct";
+import { BookType } from "@/interfaces/book";
 
-export default function ProductDetail({ product, products }: any){
-    const [selectedSize, setSelectedSize] = useState();
-    const [showError, setShowError] = useState(false);
+interface Props{
+    product: {data: BookType[]}
+    products: {data: BookType[]}
+    slug: string
+}
+
+const ProductDetail: React.FC<Props>=({ product, products,slug })=>{
     // const dispatch = useDispatch();
-    const p = product?.data?.[0]?.attributes;
+    const p = product.data[0].attributes;
     const notify = () => {
         toast.success("Success. Check your cart!", {
             position: "bottom-right",
@@ -34,7 +39,7 @@ export default function ProductDetail({ product, products }: any){
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
             {/* Left column start */}
             <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                <Image src={p.image.data.attributes.formats.thumbnail.url} width="500" height="300" alt='image' />
+                <Image src={p.image.data.attributes.formats.large.url} width="500" height="300" alt='image' quality={50}/>
             </div>
             {/* left Column End */}
             {/* right column start */}
@@ -115,12 +120,15 @@ export default function ProductDetail({ product, products }: any){
             {/* right column end */}
         </div>
 
-        <RelatedProducts products={products} />
+        <RelatedProducts products={products.data} />
         {/* <RelatedProducts/> */}
     </Wrapper>
 </div>
   )
 }
+
+export default ProductDetail;
+
 export async function getStaticPaths() {
     const products = await fetchDataFromApi("/api/products?populate=*");
     const paths = products?.data?.map((p: any) => ({
@@ -147,6 +155,7 @@ export async function getStaticProps({ params: { slug } }: any) {
         props: {
             product,
             products,
+            slug
         },
     };
 }

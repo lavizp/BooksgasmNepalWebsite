@@ -1,5 +1,3 @@
-import {useState, useEffect} from 'react'
-
 import ProductCard from '@/components/productCard'
 import Wrapper from '@/components/wraper'
 import HeroBanner from '@/components/heroBanner'
@@ -12,12 +10,10 @@ export default function Home({products}: any) {
                         {/* heading and paragaph start */}
                         <div className="text-center max-w-[800px] mx-auto my-[50px] md:my-[80px]">
                     <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-                        Cushioning for Your Miles
+                        Our BestSellers:
                     </div>
                     <div className="text-md md:text-xl">
-                        A lightweight Nike ZoomX midsole is combined with
-                        increased stack heights to help provide cushioning
-                        during extended stretches of running.
+                        Here are best books picked by our valued customers. Make sure to read them and get intresting customized Bookmarks.😉
                     </div>
                 </div>
                 {/* heading and paragaph end */}

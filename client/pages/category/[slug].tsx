@@ -8,8 +8,9 @@ import { BookType } from "@/interfaces/book";
 import { CategoryType } from "@/interfaces/category";
 const maxResult = 3;
 
+
 interface Props{
-    category: CategoryType[],
+    category: {data: CategoryType[]},
     products: BookType[],
     slug: string
 }
@@ -33,7 +34,8 @@ const Category: React.FC<Props>=({ category, products, slug })=>{
             <Wrapper>
                 <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
                     <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-                        {category?.[0]?.attributes?.name}
+                        {category.data[0].attributes.name}
+                        
                     </div>
                 </div>
 
@@ -107,7 +109,6 @@ export async function getStaticProps({ params: { slug } }: any) {
     const products = await fetchDataFromApi(
         `/api/products?populate=*&[filters][category][slug][$eq]=${slug}&pagination[page]=1&pagination[pageSize]=${maxResult}`
     );
-        console.log(products)
     return {
         props: {
             category,
