@@ -3,31 +3,32 @@ import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { BookType } from "@/interfaces/book";
+import { removeFromCart, updateCart } from "@/store/cartSlice";
 
 interface Props{
     data: BookType
 }
 
-const CartItem: React.FC<Props> = ({ data: { attributes: p, id }}) => {
-//     const p = data.attributes;
+const CartItem: React.FC<Props> = ({ data: { attributes: p, id: id }}) => {
 
-//     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-//     const updateCartItem = (e, key) => {
-//         let payload = {
-//             key,
-//             val: key === "quantity" ? parseInt(e.target.value) : e.target.value,
-//             id: data.id,
-//         };
-//         dispatch(updateCart(payload));
-//     };
+    const updateCartItem = (e: any, key: string, id: number) => {
+        let payload = {
+            key,
+            val: key === "quantity" ? parseInt(e.target.value) : e.target.value,
+            id: id,
+            oneQuantity: p.price
+        };
+        dispatch(updateCart(payload));
+    };
 
     return (
         <div className="flex py-5 gap-3 md:gap-5 border-b">
             {/* IMAGE START */}
             <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
                 <Image
-                    src="/book.webp"
+                    src={p.image.data.attributes.url}
                     alt="asd"
                     width={120}
                     height={120}
@@ -44,18 +45,18 @@ const CartItem: React.FC<Props> = ({ data: { attributes: p, id }}) => {
 
                     {/* PRODUCT SUBTITLE */}
                     <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-                        Subtitle
+                        {p.subtitle}
                     </div>
 
                     {/* PRODUCT PRICE */}
                     <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
-                        MRP : &#8377;Price
+                        MRP : &#8377;{p.price}
                     </div>
                 </div>
 
                 {/* PRODUCT SUBTITLE */}
                 <div className="text-md font-medium text-black/[0.5] hidden md:block">
-                    Subtitle
+                    {p.subtitle}
                 </div>
 
                 <div className="flex items-center justify-between mt-4">
@@ -67,7 +68,7 @@ const CartItem: React.FC<Props> = ({ data: { attributes: p, id }}) => {
                             <div className="font-semibold">Quantity:</div>
                             <select
                                 className="hover:text-black"
-                                // onChange={(e) => updateCartItem(e, "quantity")}
+                                onChange={(e) => updateCartItem(e, "quantity", id)}
                             >
                                 {Array.from(
                                     { length: 10 },
@@ -87,9 +88,9 @@ const CartItem: React.FC<Props> = ({ data: { attributes: p, id }}) => {
                         </div>
                     </div>
                     <RiDeleteBin6Line
-                        // onClick={() =>
-                        //     dispatch(removeFromCart({ id: data.id }))
-                        // }
+                        onClick={() =>
+                            dispatch(removeFromCart({ id:id }))
+                        }
                         className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]"
                     />
                 </div>

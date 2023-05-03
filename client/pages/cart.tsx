@@ -1,10 +1,34 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import Wrapper from '@/components/wraper'
 import Image from 'next/image'
 import CartItem from '@/components/cartItem'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import { makePaymentRequest } from '@/utils/api'
 
 function Cart() {
+    const [loading, setLoading] = useState(false);
+    const { cartItems } = useSelector((state: any) => state.cart);
+    const subTotal: number = useMemo(() => {
+        return cartItems.reduce(
+            (total: number, val: any) => total + val.attributes.price,0
+        );
+    }, [cartItems]);
+    const handlePayment = async () => {
+        try {
+            setLoading(true);
+            // const stripe = await stripePromise;
+            const res = await makePaymentRequest("/api/orders", {
+                products: cartItems,
+            });
+            // await stripe.redirectToCheckout({
+            //     sessionId: res.stripeSession.id,
+            // });
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
   return (
     <div className="w-full md:py-20">
     <Wrapper>
@@ -25,19 +49,10 @@ function Cart() {
                         <div className="text-lg font-bold">
                             Cart Items
                         </div>
-                        {cartItems.map((item) => (
+                        {cartItems.map((item: any) => (
                             <CartItem key={item.id} data={item} />
                         ))}
-                        {/* <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/> */}
+
 
                     </div>
                     {/* CART ITEMS END */}
@@ -52,7 +67,7 @@ function Cart() {
                                     Subtotal
                                 </div>
                                 <div className="text-md md:text-lg font-medium text-black">
-                                    &#8377;Subtotal
+                                    &#8377;{subTotal}
                                 </div>
                             </div>
                             <div className="text-sm md:text-md py-5 border-t mt-5">
@@ -67,10 +82,10 @@ function Cart() {
                         {/* BUTTON START */}
                         <button
                             className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75 flex items-center gap-2 justify-center"
-                            // onClick={handlePayment}
+                            onClick={handlePayment}
                         >
                             Checkout
-                            {/* {loading && <img src="/spinner.svg" />} */}
+                            {loading && <img src="/spinner.svg" />}
                         </button>
                         {/* BUTTON END */}
                     </div>

@@ -10,6 +10,8 @@ import { fetchDataFromApi } from "@/utils/api";
 import { getDiscountedPricePercentage } from "@/utils/helper";
 import RelatedProducts from "@/components/relatedProduct";
 import { BookType } from "@/interfaces/book";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
 
 interface Props{
     product: {data: BookType[]}
@@ -18,7 +20,7 @@ interface Props{
 }
 
 const ProductDetail: React.FC<Props>=({ product, products,slug })=>{
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const p = product.data[0].attributes;
     const notify = () => {
         toast.success("Success. Check your cart!", {
@@ -32,6 +34,16 @@ const ProductDetail: React.FC<Props>=({ product, products,slug })=>{
             theme: "dark",
         });
     };
+
+    const addToCarthandler = ()=>{
+        let payload = {
+            id: product.data[0].id,
+            oneQuantity: p.price
+        };
+        dispatch(
+            addToCart(payload)
+        );
+    }
   return (
     <div className="w-full md:py-20">
     <ToastContainer />
@@ -86,13 +98,8 @@ const ProductDetail: React.FC<Props>=({ product, products,slug })=>{
                 <button
                     className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
                     onClick={() => {
-                            // dispatch(
-                            //     addToCart({
-                            //         ...product?.data?.[0],
-                            //         selectedSize,
-                            //         oneQuantityPrice: p.price,
-                            //     })
-                            // );
+                        
+                        addToCarthandler();
                             notify();
             
                     }}
