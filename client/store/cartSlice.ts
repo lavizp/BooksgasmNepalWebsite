@@ -2,7 +2,7 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { BookType } from "@/interfaces/book";
 
 
-interface CartType{
+interface CartType extends BookType{
     id: number
     oneQuantity: number
 }
@@ -13,7 +13,16 @@ interface UpdateCartType{
     id: number
     oneQuantity: number
 }
-const initialState = {
+
+interface CartItemType extends BookType{
+    quantity: number
+    oneQuantityPrice: number
+}
+
+interface StateType{
+    cartItems: CartItemType[]
+}
+const initialState:StateType = {
     cartItems: [],
   };
 
@@ -27,7 +36,7 @@ export const cartSlice = createSlice({
             );
             if (item) {
                 item.quantity++;
-                item.attributes.price = item.oneQuantityPrice * 1;
+                item.attributes.price = item.oneQuantityPrice * item.quantity;
             } else {
                 state.cartItems.push({ ...action.payload, quantity: 1 });
             }
@@ -49,6 +58,7 @@ export const cartSlice = createSlice({
                 (p: any) => p.id !== action.payload.id
             );
         },
+
     },
 });
 

@@ -11,7 +11,7 @@ function Cart() {
     const { cartItems } = useSelector((state: any) => state.cart);
     const subTotal: number = useMemo(() => {
         return cartItems.reduce(
-            (total: number, val: any) => total + val.attributes.price,0
+            (total: number, val: any) => total,0
         );
     }, [cartItems]);
     const handlePayment = async () => {

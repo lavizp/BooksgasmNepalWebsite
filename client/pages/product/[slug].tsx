@@ -37,6 +37,7 @@ const ProductDetail: React.FC<Props>=({ product, products,slug })=>{
 
     const addToCarthandler = ()=>{
         let payload = {
+            ...product.data[0],
             id: product.data[0].id,
             oneQuantity: p.price
         };
