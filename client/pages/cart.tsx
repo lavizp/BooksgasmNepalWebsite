@@ -10,9 +10,11 @@ function Cart() {
     const [loading, setLoading] = useState(false);
     const { cartItems } = useSelector((state: any) => state.cart);
     const subTotal: number = useMemo(() => {
-        return cartItems.reduce(
-            (total: number, val: any) => total,0
-        );
+        let total = 0;
+        cartItems.forEach((element: any) => {
+            total += (element.quantity*element.oneQuantity)
+        });
+        return total
     }, [cartItems]);
     const handlePayment = async () => {
         try {

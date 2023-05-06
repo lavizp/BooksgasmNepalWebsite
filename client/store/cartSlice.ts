@@ -16,7 +16,7 @@ interface UpdateCartType{
 
 interface CartItemType extends BookType{
     quantity: number
-    oneQuantityPrice: number
+    oneQuantity: number
 }
 
 interface StateType{
@@ -31,12 +31,13 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state: any, action: PayloadAction<CartType>) => {
+            console.log(action.payload)
             const item: any = state.cartItems.find(
                 (p: any) => p.id === action.payload.id
             );
             if (item) {
                 item.quantity++;
-                item.attributes.price = item.oneQuantityPrice * item.quantity;
+                item.attributes.price = item.oneQuantity * item.quantity;
             } else {
                 state.cartItems.push({ ...action.payload, quantity: 1 });
             }
@@ -44,10 +45,6 @@ export const cartSlice = createSlice({
         updateCart: (state: any, action: PayloadAction<UpdateCartType>) => {
             state.cartItems = state.cartItems.map((p: any) => {
                 if (p.id === action.payload.id) {
-                    if (action.payload.key === "quantity") {
-                        p.attributes.price =
-                            p.oneQuantityPrice * action.payload.val;
-                    }
                     return { ...p, [action.payload.key]: action.payload.val };
                 }
                 return p;
