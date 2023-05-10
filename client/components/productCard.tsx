@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { getDiscountedPricePercentage } from "@/utils/helper";
 import { BookType } from "@/interfaces/book";
+import { data } from "autoprefixer";
 
 interface Props{
     data: BookType
@@ -10,6 +11,7 @@ interface Props{
 
 const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}) => {
     return (
+
         <Link
         href={`/product/${p.slug}`}
         className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer"
@@ -17,7 +19,7 @@ const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}) => {
         <Image
             width={500}
             height={500}
-            src={p.image.data.attributes.formats.large.url}
+            src={p.image.data.attributes.url}
             alt={p.name}
         />
         <div className="p-4 text-black/[0.9]">
@@ -36,7 +38,7 @@ const ProductCard: React.FC<Props> = ({ data: { attributes: p, id }}) => {
                             {getDiscountedPricePercentage(
                                 p.original_price,
                                 p.price
-                            )}
+                                )}
                             % off
                         </p>
                     </>
