@@ -19,13 +19,9 @@ function Cart() {
     const handlePayment = async () => {
         try {
             setLoading(true);
-            // const stripe = await stripePromise;
             const res = await makePaymentRequest("/api/orders", {
                 products: cartItems,
             });
-            // await stripe.redirectToCheckout({
-            //     sessionId: res.stripeSession.id,
-            // });
         } catch (error) {
             setLoading(false);
             console.log(error);
