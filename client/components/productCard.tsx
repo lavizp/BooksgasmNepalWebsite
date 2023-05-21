@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { getDiscountedPricePercentage } from "@/lib/utils/helper";
-import { BookType } from "@/lib/utils/interfaces/book";
+import { BookType } from "@/lib/interfaces/book";
 import { data } from "autoprefixer";
 
 interface Props{

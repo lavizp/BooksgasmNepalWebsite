@@ -4,7 +4,7 @@ import HeroBanner from '@/components/HomePage/heroBanner'
 import { fetchDataFromApi } from '@/lib/utils/api'
 import BestSellerSection from '@/components/HomePage/bestSeller'
 import AdvertisementSection from '@/components/HomePage/advertisement'
-import Image from 'next/image'
+import CategorySection from '@/components/HomePage/categories'
 
 export default function Home({products}: any) {
   return (
@@ -16,7 +16,7 @@ export default function Home({products}: any) {
                 <AdvertisementSection/>
 
                 {/* Catogeries Layer Start */}
-                    {/* TODO: Make a scrollable catogeries area */}
+                    <CategorySection/>
                         
                 {/* Catogeries Layer End */}
         </Wrapper>

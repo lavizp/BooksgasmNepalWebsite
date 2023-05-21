@@ -4,8 +4,9 @@ import Wrapper from '@/components/shared/wraper';
 import ProductCard from '@/components/productCard';
 import useSWR from "swr";
 import { fetchDataFromApi } from '@/lib/utils/api';
-import { BookType } from "@/lib/utils/interfaces/book";
-import { CategoryType } from "@/lib/utils/interfaces/category";
+import { capitaliseFirstLetter } from "@/lib/utils/helper";
+import { BookType } from "@/lib/interfaces/book";
+import { CategoryType } from "@/lib/interfaces/category";
 const maxResult = 3;
 
 
@@ -34,7 +35,7 @@ const Category: React.FC<Props>=({ category, products, slug })=>{
             <Wrapper>
                 <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
                     <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-                        {category.data[0].attributes.name}
+                        {capitaliseFirstLetter(category.data[0].attributes.name)}
                         
                     </div>
                 </div>

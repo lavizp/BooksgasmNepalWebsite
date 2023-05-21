@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductCard from '../productCard'
-import { BookType } from '@/lib/utils/interfaces/book'
+import { BookType } from '@/lib/interfaces/book'
 interface Props{
     products: BookType[]
 }
