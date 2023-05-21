@@ -13,10 +13,7 @@ export default function Home({products}: any) {
         <Wrapper>
                 <BestSellerSection products={products.data}/>
 
-                {/* Advertisement Layer Start */}
-
-                
-                {/* Advertisement Layer End */}
+                <AdvertisementSection/>
 
                 {/* Catogeries Layer Start */}
                     {/* TODO: Make a scrollable catogeries area */}
