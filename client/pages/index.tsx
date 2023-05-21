@@ -1,7 +1,7 @@
 import ProductCard from '@/components/productCard'
-import Wrapper from '@/components/wraper'
-import HeroBanner from '@/components/heroBanner'
-import { fetchDataFromApi } from '@/utils/api'
+import Wrapper from '@/components/shared/wraper'
+import HeroBanner from '@/components/HomePage/heroBanner'
+import { fetchDataFromApi } from '@/lib/utils/api'
 export default function Home({products}: any) {
   return (
     <main>
@@ -20,12 +20,25 @@ export default function Home({products}: any) {
 
                 {/* products grid start */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 my-14 px-5 md:px-20">
-                    {products?.data?.map((product: any) => (
+                    {products?.data?.slice(0,6).map((product: any) => (
                         <ProductCard key={product?.id} data={product} />
                     ))}
                     
                 </div>
                 {/* products grid end */}
+
+                {/* Advertisement Layer Start */}
+                <div className='rounded-xl w-full bg-black h-36'>
+                    .
+
+                </div>
+                
+                {/* Advertisement Layer End */}
+
+                {/* Catogeries Layer Start */}
+                    {/* TODO: Make a scrollable catogeries area */}
+                        
+                {/* Catogeries Layer End */}
         </Wrapper>
     </main>
   )

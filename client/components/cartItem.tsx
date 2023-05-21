@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { BookType } from "@/interfaces/book";
+import { BookType } from "@/lib/interfaces/book";
 import { removeFromCart, updateCart } from "@/store/cartSlice";
 
 interface Props{

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Wrapper from '@/components/wraper';
+import Wrapper from '@/components/shared/wraper';
 import ProductCard from '@/components/productCard';
 import useSWR from "swr";
-import { fetchDataFromApi } from '@/utils/api';
-import { BookType } from "@/interfaces/book";
-import { CategoryType } from "@/interfaces/category";
+import { fetchDataFromApi } from '@/lib/utils/api';
+import { BookType } from "@/lib/interfaces/book";
+import { CategoryType } from "@/lib/interfaces/category";
 const maxResult = 3;
 
 

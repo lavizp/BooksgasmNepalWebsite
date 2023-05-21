@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react'
-import Wrapper from '@/components/wraper'
+import Wrapper from '@/components/shared/wraper'
 import Image from 'next/image'
 import CartItem from '@/components/cartItem'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
-import { makePaymentRequest } from '@/utils/api'
+import { makePaymentRequest } from '@/lib/utils/api'
 
 function Cart() {
     const [loading, setLoading] = useState(false);

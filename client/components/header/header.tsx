@@ -3,9 +3,9 @@ import Link from "next/link";
 import Image from 'next/image';
 
 import { Menu } from './menu';
-import Wrapper from '../wraper'
+import Wrapper from '../shared/wraper'
 import MenuMobile from './menuMobile';
-import { fetchDataFromApi } from '@/utils/api';
+import { fetchDataFromApi } from '@/lib/utils/api';
 import { IoMdHeartEmpty } from "react-icons/io";
 import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";

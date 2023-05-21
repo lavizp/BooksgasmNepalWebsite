@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Wrapper from '@/components/wraper';
+import Wrapper from '@/components/shared/wraper';
 import ReactMarkdown from "react-markdown";
 import Image from 'next/image';
 // import RelatedProducts from '@/components/relatedProduct';
-import { fetchDataFromApi } from "@/utils/api";
-import { getDiscountedPricePercentage } from "@/utils/helper";
+import { fetchDataFromApi } from "@/lib/utils/api";
+import { getDiscountedPricePercentage } from "@/lib/utils/helper";
 import RelatedProducts from "@/components/relatedProduct";
-import { BookType } from "@/interfaces/book";
+import { BookType } from "@/lib/interfaces/book";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 
