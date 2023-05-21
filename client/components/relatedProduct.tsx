@@ -3,7 +3,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ProductCard from "./productCard";
-import { BookType } from "@/lib/interfaces/book";
+import { BookType } from "@/lib/utils/interfaces/book";
 interface Props{
     products: BookType[]
 }

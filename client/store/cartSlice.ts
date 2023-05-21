@@ -1,5 +1,5 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
-import { BookType } from "@/lib/interfaces/book";
+import { BookType } from "@/lib/utils/interfaces/book";
 
 
 interface CartType extends BookType{

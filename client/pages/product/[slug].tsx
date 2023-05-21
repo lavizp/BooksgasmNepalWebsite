@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { fetchDataFromApi } from "@/lib/utils/api";
 import { getDiscountedPricePercentage } from "@/lib/utils/helper";
 import RelatedProducts from "@/components/relatedProduct";
-import { BookType } from "@/lib/interfaces/book";
+import { BookType } from "@/lib/utils/interfaces/book";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";
 

@@ -4,8 +4,8 @@ import Wrapper from '@/components/shared/wraper';
 import ProductCard from '@/components/productCard';
 import useSWR from "swr";
 import { fetchDataFromApi } from '@/lib/utils/api';
-import { BookType } from "@/lib/interfaces/book";
-import { CategoryType } from "@/lib/interfaces/category";
+import { BookType } from "@/lib/utils/interfaces/book";
+import { CategoryType } from "@/lib/utils/interfaces/category";
 const maxResult = 3;
 
 
