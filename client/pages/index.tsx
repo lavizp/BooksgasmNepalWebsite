@@ -15,10 +15,8 @@ export default function Home({products}: any) {
 
                 <AdvertisementSection/>
 
-                {/* Catogeries Layer Start */}
-                    <CategorySection/>
+                <CategorySection/>
                         
-                {/* Catogeries Layer End */}
         </Wrapper>
     </main>
   )

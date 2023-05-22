@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { CategoryType } from '@/lib/interfaces/category'
 import { fetchDataFromApi } from '@/lib/utils/api'
 import { capitaliseFirstLetter } from '@/lib/utils/helper'
+import Image from 'next/image'
 import Link from 'next/link'
 const CategorySection: React.FC=()=> {
     const responsive = {
@@ -41,10 +42,13 @@ const CategorySection: React.FC=()=> {
             {categories? categories.map((item: CategoryType)=> {
                 return(
                     <Link key={item.id} href={`/category/${item.attributes.slug}`}>
-                        <div>
-                            <div className='h-40 w-40 rounded-full bg-slate-400 flex justify-center items-center'>
-                                {capitaliseFirstLetter(item.attributes.name)}
+                        <div className="flex justify-center items-center hover:scale-110 transition-transform duration-300">
+                          <div className="relative w-40 h-40 rounded-full overflow-hidden">
+                            <Image src={item.attributes.image} alt="Your Image" className="w-full h-full object-cover" width={500} height={500}/>
+                            <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 ">
+                              <span className="text-white text-xl font-bold">{capitaliseFirstLetter(item.attributes.name)}</span>
                             </div>
+                          </div>
                         </div>
                     </Link>
         )}): <div/>}
