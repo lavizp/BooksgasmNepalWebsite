@@ -17,7 +17,7 @@ function About() {
   return (
     <Wrapper>
 
-    <div className='flex flex-wrap-reverse justify-around my-10 md:text-6xl text-4xl'>
+    <div className='flex flex-wrap-reverse justify-around my-10 md:text-6xl text-4xl items-center'>
       <div className='md:w-[50%] w-[70%] text-center md:text-left'>
         <span className='bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent font-bold'>We</span> are Nepals most reliable online bookstore.
       </div>
