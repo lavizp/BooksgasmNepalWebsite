@@ -1,8 +1,8 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { BookType } from "@/lib/utils/interfaces/book";
+import { BookType } from "@/lib/interfaces/book";
 import { removeFromCart, updateCart } from "@/store/cartSlice";
 
 interface Props{
@@ -10,7 +10,6 @@ interface Props{
 }
 
 const CartItem: React.FC<Props> = ({ data: { attributes: p, id: id }}) => {
-
     const dispatch = useDispatch();
 
     const updateCartItem = (e: any, key: string, id: number) => {
@@ -78,7 +77,7 @@ const CartItem: React.FC<Props> = ({ data: { attributes: p, id: id }}) => {
                                         <option
                                             key={i}
                                             value={q}
-                                            selected= {true}
+                                            selected= {q==1? true: false}
                                         >
                                             {q}
                                         </option>

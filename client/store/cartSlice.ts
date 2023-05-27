@@ -1,6 +1,6 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 import { BookType } from "@/lib/interfaces/book";
-
+import { saveState, loadState } from "@/lib/utils/localStorage";
 
 interface CartType extends BookType{
     id: number
@@ -23,7 +23,7 @@ interface StateType{
     cartItems: CartItemType[]
 }
 const initialState:StateType = {
-    cartItems: [],
+    cartItems: loadState() || []
   };
 
 export const cartSlice = createSlice({
@@ -31,21 +31,23 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state: any, action: PayloadAction<CartType>) => {
-            console.log(action.payload)
             const item: any = state.cartItems.find(
                 (p: any) => p.id === action.payload.id
             );
             if (item) {
                 item.quantity++;
-                item.attributes.price = item.oneQuantity * item.quantity;
             } else {
                 state.cartItems.push({ ...action.payload, quantity: 1 });
             }
+            saveState(state.cartItems)
+
         },
         updateCart: (state: any, action: PayloadAction<UpdateCartType>) => {
             state.cartItems = state.cartItems.map((p: any) => {
                 if (p.id === action.payload.id) {
-                    return { ...p, [action.payload.key]: action.payload.val };
+                    let dt =  { ...p, [action.payload.key]: action.payload.val };
+                    saveState(dt)
+                    return dt
                 }
                 return p;
             });
@@ -54,6 +56,9 @@ export const cartSlice = createSlice({
             state.cartItems = state.cartItems.filter(
                 (p: any) => p.id !== action.payload.id
             );
+            saveState(state.cartItems)
+
+
         },
 
     },

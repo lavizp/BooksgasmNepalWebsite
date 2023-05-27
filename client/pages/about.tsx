@@ -31,7 +31,7 @@ function About() {
       )}
 
     </div>
-    <div className='mb-10'>
+    <div className='mb-10 text-center'>
       <h2 className='md:text-6xl text-2xl mb-6'>About Booksgasm Nepal</h2>
       <span className='md:text-xl text-sm leading-8'>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore recusandae iste quo molestias ut, non id quam sapiente voluptas debitis voluptatibus perspiciatis, maiores laborum officia eum dolorem hic, consequatur omnis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique blanditiis minus eum impedit? Illo ipsum, quidem similique consectetur odio tenetur eum itaque distinctio vitae, natus, nobis unde nihil harum voluptate.
@@ -39,7 +39,7 @@ function About() {
     </div>
 
     <div className='mb-4'>
-      <h2 className='md:text-6xl text-2xl mb-6'>Our Virtues</h2>
+      <h2 className='md:text-6xl text-2xl mb-6 text-center'>Our Virtues</h2>
     </div>
 
     </Wrapper>
