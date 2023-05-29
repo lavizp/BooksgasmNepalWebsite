@@ -5,8 +5,10 @@ import CartItem from '@/components/cartItem'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { makePaymentRequest } from '@/lib/utils/api'
+import {useRouter } from 'next/router'
 
 function Cart() {
+    const router = useRouter()
     const [loading, setLoading] = useState(false);
     const { cartItems } = useSelector((state: any) => state.cart);
     const subTotal: number = useMemo(() => {
@@ -17,6 +19,7 @@ function Cart() {
         return total
     }, [cartItems]);
     const handlePayment = async () => {
+        router.push("/checkout")
         try {
             setLoading(true);
             const res = await makePaymentRequest("/api/orders", {
