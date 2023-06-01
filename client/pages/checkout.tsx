@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import Wrapper from '@/components/shared/wraper';
 
 function Checkout() {
     const { cartItems } = useSelector((state: any) => state.cart);
@@ -11,7 +12,9 @@ function Checkout() {
         return total
     }, [cartItems]);
   return (
-    <div>{subTotal}</div>
+    <Wrapper>
+
+    </Wrapper>
   )
 }
 

@@ -33,7 +33,7 @@ function Cart() {
   return (
     <div className="w-full md:py-20">
     <Wrapper>
-        {true  && (
+        {cartItems.length > 0  && (
             <>
                 {/* HEADING AND PARAGRAPH START */}
                 <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
@@ -97,7 +97,7 @@ function Cart() {
         )}
 
         {/* This is empty screen */}
-        {2 < 1 && (
+        {cartItems.length == 0 && (
             <div className="flex-[2] flex flex-col items-center pb-[50px] md:-mt-14">
                 <Image
                     src="/empty-cart.jpg"
