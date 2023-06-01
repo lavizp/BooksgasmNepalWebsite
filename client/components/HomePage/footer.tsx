@@ -20,9 +20,6 @@ const Footer = () => {
                     </div>
                     {/* MENU END */}
 
-                    {/* NORMAL MENU START */}
-                    
-                    {/* NORMAL MENU END */}
                 </div>
                 {/* LEFT END */}
 
