@@ -1,10 +1,10 @@
 import ProductCard from '@/components/productCard'
 import Wrapper from '@/components/shared/wraper'
-import HeroBanner from '@/components/HomePage/heroBanner'
+import HeroBanner from '@/components/homePage/heroBanner'
 import { fetchDataFromApi } from '@/lib/utils/api'
-import BestSellerSection from '@/components/HomePage/bestSeller'
-import AdvertisementSection from '@/components/HomePage/advertisement'
-import CategorySection from '@/components/HomePage/categories'
+import BestSellerSection from '@/components/homePage/bestSeller'
+import AdvertisementSection from '@/components/homePage/advertisement'
+import CategorySection from '@/components/homePage/categories'
 
 export default function Home({products}: any) {
   return (
