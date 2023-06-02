@@ -2,7 +2,9 @@ import React from 'react'
 
 function OrderSection() {
   return (
-    <div>OrderSection</div>
+    <div className='w-1/2 bg-black'>
+      asd
+    </div>
   )
 }
 

@@ -13,6 +13,7 @@ function Cart() {
     const { cartItems } = useSelector((state: any) => state.cart);
     const subTotal: number = useMemo(() => {
         let total = 0;
+        console.log(cartItems[0])
         cartItems.forEach((element: any) => {
             total += (element.quantity*element.oneQuantity)
         });
