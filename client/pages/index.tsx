@@ -1,11 +1,9 @@
-import ProductCard from '@/components/productCard'
 import Wrapper from '@/components/shared/wraper'
 import HeroBanner from '@/components/homePage/heroBanner'
 import { fetchDataFromApi } from '@/lib/utils/api'
 import BestSellerSection from '@/components/homePage/bestSeller'
 import AdvertisementSection from '@/components/homePage/advertisement'
 import CategorySection from '@/components/homePage/categories'
-import { useEffect } from 'react'
 
 export default function Home({products}: any) {
 
